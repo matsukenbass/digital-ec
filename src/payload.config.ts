@@ -1,3 +1,4 @@
+import { Products } from './collection/Products/Products';
 import { webpackBundler } from '@payloadcms/bundler-webpack';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { slateEditor } from '@payloadcms/richtext-slate';
@@ -5,6 +6,9 @@ import path from 'path';
 import { buildConfig } from 'payload/config';
 import dotenv from 'dotenv';
 import { Users } from './collection/Users';
+import { Media } from './collection/Media';
+import { ProductFiles } from './collection/ProductFiles';
+import { Orders } from './collection/Orders';
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -12,7 +16,7 @@ dotenv.config({
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
-  collections: [Users],
+  collections: [Users, Products, Media, ProductFiles, Orders],
   routes: {
     admin: '/sell',
   },
