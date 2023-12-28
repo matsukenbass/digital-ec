@@ -6,7 +6,6 @@ import { useCart } from '@/hooks/use-cart';
 import { Product } from '@/payload-types';
 
 const AddToCartButton = ({ product }: { product: Product }) => {
-  console.log(product);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const { addItem } = useCart();
   useEffect(() => {
