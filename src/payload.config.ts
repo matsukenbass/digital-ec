@@ -1,14 +1,14 @@
-import { Products } from './collection/Products/Products';
+import { buildConfig } from 'payload/config';
 import { webpackBundler } from '@payloadcms/bundler-webpack';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { slateEditor } from '@payloadcms/richtext-slate';
 import path from 'path';
-import { buildConfig } from 'payload/config';
+import { Users } from './collections/Users';
 import dotenv from 'dotenv';
-import { Users } from './collection/Users';
-import { Media } from './collection/Media';
-import { ProductFiles } from './collection/ProductFiles';
-import { Orders } from './collection/Orders';
+import { Products } from './collections/Products/Products';
+import { Media } from './collections/Media';
+import { ProductFiles } from './collections/ProductFiles';
+import { Orders } from './collections/Orders';
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),

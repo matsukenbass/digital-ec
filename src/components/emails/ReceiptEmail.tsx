@@ -44,7 +44,7 @@ export const ReceiptEmail = ({ email, date, orderId, products }: ReceiptEmailPro
                 src={`${process.env.NEXT_PUBLIC_SERVER_URL}/hippo-email-sent.png`}
                 width="100"
                 height="100"
-                alt="DigitalHippo"
+                alt="DigitalEC"
               />
             </Column>
 

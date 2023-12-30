@@ -23,8 +23,6 @@ export const useCart = create<CartState>()(
       items: [],
       addItem: (product) =>
         set((state) => {
-          console.log(state.items[0]);
-          console.log(product.id);
           return state.items.find((item) => item.product.id !== product.id) ||
             state.items.length === 0
             ? { items: [...state.items, { product }] }

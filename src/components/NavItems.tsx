@@ -34,14 +34,16 @@ const NavItems = () => {
             setActiveIndex(i);
           }
         };
+        const close = () => setActiveIndex(null);
         const isOpen = i === activeIndex;
         return (
           <NavItem
-            key={i}
+            key={category.value}
             category={category}
             handleOpen={handleOpen}
             isOpen={isOpen}
             isAnyOpen={isAnyOpen}
+            close={close}
           />
         );
       })}
