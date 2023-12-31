@@ -18,6 +18,7 @@ COPY --chown=node:node --from=builder /my-project/dist ./dist
 COPY --chown=node:node --from=builder /my-project/build ./build
 COPY --chown=node:node --from=builder /my-project/node_modules ./node_modules
 COPY --chown=node:node --from=builder /my-project/package.json ./package.json
+COPY --chown=node:node --from=builder /my-project/next.config.js ./next.config.js
 
 EXPOSE 3000
 CMD ["yarn", "start"]

@@ -9,6 +9,8 @@ import { Products } from './collections/Products/Products';
 import { Media } from './collections/Media';
 import { ProductFiles } from './collections/ProductFiles';
 import { Orders } from './collections/Orders';
+import { cloudStorage } from '@payloadcms/plugin-cloud-storage';
+import { s3Adapter } from '@payloadcms/plugin-cloud-storage/s3';
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -39,4 +41,40 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
+  plugins: [
+    // Pass the plugin to Payload
+    cloudStorage({
+      collections: {
+        // Enable cloud storage for Media collection
+        media: {
+          // Create the S3 adapter
+          adapter: s3Adapter({
+            config: {
+              // endpoint: process.env.S3_ENDPOINT,
+              credentials: {
+                accessKeyId: process.env.S3_ACCESS_KEY_ID ?? '',
+                secretAccessKey: process.env.S3_SECRET_ACCESS_KEY ?? '',
+              },
+              region: process.env.AWS_REGION,
+            },
+            bucket: 'digital-ec-media-bucket',
+          }),
+        },
+        product_files: {
+          // Create the S3 adapter
+          adapter: s3Adapter({
+            config: {
+              // endpoint: process.env.S3_ENDPOINT,
+              credentials: {
+                accessKeyId: process.env.S3_ACCESS_KEY_ID ?? '',
+                secretAccessKey: process.env.S3_SECRET_ACCESS_KEY ?? '',
+              },
+              region: process.env.AWS_REGION,
+            },
+            bucket: 'digital-ec-product-files-bucket',
+          }),
+        },
+      },
+    }),
+  ],
 });
