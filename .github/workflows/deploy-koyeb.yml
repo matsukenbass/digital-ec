@@ -23,8 +23,6 @@ jobs:
             "AWS_REGION=${{vars.AWS_REGION}}"
             "S3_ACCESS_KEY_ID=${{vars.S3_ACCESS_KEY_ID}}"
             "S3_SECRET_ACCESS_KEY=${{vars.S3_SECRET_ACCESS_KEY}}"
-      # - name: Docker push
-      #   run: docker push ghcr.io/matsukenbass/my-project:latest
       - name: Install and configure the Koyeb CLI
         uses: koyeb-community/install-koyeb-cli@v2
         with:
