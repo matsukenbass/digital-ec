@@ -38,8 +38,8 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
   const inactiveStyles = 'hidden text-gray-400';
 
   return (
-    <div className="group relative bg-zinc-100 aspect-square overflow-hidden rounded-xl">
-      <div className="absolute z-10 inset-0 opacity-0 group-hover:opacity-100 transition">
+    <div className="group relative aspect-square overflow-hidden rounded-xl bg-zinc-100">
+      <div className="absolute inset-0 z-10 opacity-0 transition group-hover:opacity-100">
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -81,7 +81,7 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
         className="h-full w-full"
       >
         {urls.map((url, i) => (
-          <SwiperSlide key={i} className="-z-10 relative h-full w-full">
+          <SwiperSlide key={i} className="relative -z-10 h-full w-full">
             <Image
               fill
               sizes="100vw"

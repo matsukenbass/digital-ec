@@ -51,7 +51,7 @@ const ThankYouPage = async ({ searchParams }: PageProps) => {
           sizes="100vw"
           src="/checkout-thank-you.jpg"
           alt="thank you for your order"
-          className="h-full w-full object-center object-cover"
+          className="h-full w-full object-cover object-center"
         />
       </div>
       <div>
@@ -98,7 +98,7 @@ const ThankYouPage = async ({ searchParams }: PageProps) => {
                           />
                         ) : null}
                       </div>
-                      <div className="flex-auto flex flex-col justify-between">
+                      <div className="flex flex-auto flex-col justify-between">
                         <div className="space-y-1">
                           <h3 className="text-gray-900">{product.name}</h3>
                           <p className="my-1">Category: {label}</p>
@@ -107,7 +107,7 @@ const ThankYouPage = async ({ searchParams }: PageProps) => {
                           <a
                             href={downloadUrl}
                             download={product.name}
-                            className="text-blue-600 hover:underline underline-offset-2"
+                            className="text-blue-600 underline-offset-2 hover:underline"
                           >
                             Download asset
                           </a>

@@ -17,8 +17,8 @@ const VerifyEmail = ({ token }: VerifyEmailProps) => {
     return (
       <div className="flex flex-col items-center gap-2">
         <XCircle className="h-8 w-8 text-red-600" />
-        <h3 className="font-semibold text-xl">There was a problem</h3>
-        <p className="text-muted-foreground text-sm">
+        <h3 className="text-xl font-semibold">There was a problem</h3>
+        <p className="text-sm text-muted-foreground">
           This token is not valid or might be expired. Please try again
         </p>
       </div>
@@ -31,8 +31,8 @@ const VerifyEmail = ({ token }: VerifyEmailProps) => {
         <div className="relative mb-4 h-60 w-60 text-muted-foreground">
           <Image fill sizes="100vw" src="/hippo-email-sent.png" alt="the email was sent" />
         </div>
-        <h3 className="font-semibold text-2xl">You&apos;re all set!</h3>
-        <p className="text-muted-foreground text-center mt-1">
+        <h3 className="text-2xl font-semibold">You&apos;re all set!</h3>
+        <p className="mt-1 text-center text-muted-foreground">
           Thank you for verifying your email.
         </p>
         <Link href="/sign-in" className={buttonVariants({ className: 'mt-4' })}>
@@ -45,9 +45,9 @@ const VerifyEmail = ({ token }: VerifyEmailProps) => {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center gap-2">
-        <Loader2 className="animate-spin h-8 w-8 text-zinc-300" />
-        <h3 className="font-semibold text-xl">Verifying</h3>
-        <p className="text-muted-foreground text-sm">This won&apos;t take long.</p>
+        <Loader2 className="h-8 w-8 animate-spin text-zinc-300" />
+        <h3 className="text-xl font-semibold">Verifying</h3>
+        <p className="text-sm text-muted-foreground">This won&apos;t take long.</p>
       </div>
     );
   }

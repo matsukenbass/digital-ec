@@ -53,8 +53,8 @@ const Page = () => {
                     alt="empty shopping cat hippo"
                   ></Image>
                 </div>
-                <h3 className="font-semibold text-2xl">Your cart is empty</h3>
-                <p className="text0muted-foreground text-center">
+                <h3 className="text-2xl font-semibold">Your cart is empty</h3>
+                <p className="text-center text-muted-foreground">
                   Whoops! Nothing to show here yet.
                 </p>
               </div>
@@ -71,7 +71,7 @@ const Page = () => {
                   const { image } = product.images[0];
                   return (
                     <li key={product.id} className="flex py-6 sm:py-10">
-                      <div className="flex-shrink-0">
+                      <div className="shrink-0">
                         <div className="relative h-24 w-24">
                           {typeof image !== 'string' && image.url ? (
                             <Image
@@ -104,7 +104,7 @@ const Page = () => {
                               {formatPrice(product.price)}
                             </p>
                           </div>
-                          <div className="mt-4 sm:mt-0 sm:pr-9 w-20">
+                          <div className="mt-4 w-20 sm:mt-0 sm:pr-9">
                             <div className="absolute right-0 top-0">
                               <Button
                                 aria-label="remove product"
@@ -119,7 +119,7 @@ const Page = () => {
                           </div>
                         </div>
                         <p className="mt-4 flex space-x-2 text-sm text-gray-700">
-                          <Check className="h-5 w-5 flex-shrink-0 text-green-500" />
+                          <Check className="h-5 w-5 shrink-0 text-green-500" />
                           <span>Eligible for instant delivery</span>
                         </p>
                       </div>
@@ -171,7 +171,7 @@ const Page = () => {
                 onClick={() => createCheckoutSession({ productIds })}
                 disabled={items.length === 0 || isLoading}
               >
-                {isLoading ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : null}
+                {isLoading ? <Loader2 className="mr-1.5 h-4 w-4 animate-spin" /> : null}
                 Checkout
               </Button>
             </div>

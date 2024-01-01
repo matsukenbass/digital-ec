@@ -10,7 +10,7 @@ const Footer = () => {
   const pathsToMinimize = ['/verify-email', '/sign-up', '/sign-in'];
 
   return (
-    <footer className="bg-white flex-grow-0">
+    <footer className="grow-0 bg-white">
       <MaxWidthWrapper>
         <div className="border-t border-gray-200">
           {pathsToMinimize.includes(pathname) ? null : (
@@ -23,15 +23,15 @@ const Footer = () => {
 
           {pathsToMinimize.includes(pathname) ? null : (
             <div>
-              <div className="relative flex items-center px-6 py-6 sm:py-8 lg:mt-0">
+              <div className="relative flex items-center p-6 sm:py-8 lg:mt-0">
                 <div className="absolute inset-0 overflow-hidden rounded-lg">
                   <div
                     aria-hidden="true"
-                    className="absolute bg-zinc-50 inset-0 bg-gradient-to-br bg-opacity-90"
+                    className="absolute inset-0 bg-zinc-50/90 bg-gradient-to-br"
                   />
                 </div>
 
-                <div className="text-center relative mx-auto max-w-sm">
+                <div className="relative mx-auto max-w-sm text-center">
                   <h3 className="font-semibold text-gray-900">Become a seller</h3>
                   <p className="mt-2 text-sm text-muted-foreground">
                     If you&apos;d like to sell high-quality digital products, you can do so in

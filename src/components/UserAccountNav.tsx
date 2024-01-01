@@ -22,10 +22,10 @@ const UserAccountNav = ({ user }: { user: User }) => {
           My account
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bd-white w-60" align="end">
+      <DropdownMenuContent className="w-60 bg-white" align="end">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex-col space-y-0.5 leading-none">
-            <p className="font-medium text-sm text-black">{user.email}</p>
+            <p className="text-sm font-medium text-black">{user.email}</p>
           </div>
         </div>
         <DropdownMenuSeparator />
