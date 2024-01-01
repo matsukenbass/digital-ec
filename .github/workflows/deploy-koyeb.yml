@@ -1,9 +1,6 @@
 name: Deploy to Koyeb
 on: [push]
 
-# env:
-#   GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
-
 jobs:
   build:
     runs-on: ubuntu-latest

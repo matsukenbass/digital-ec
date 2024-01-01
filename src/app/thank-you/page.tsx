@@ -48,6 +48,7 @@ const ThankYouPage = async ({ searchParams }: PageProps) => {
       <div className="h-80 overflow-hidden lg:absolute lg:h-full lg:w-1/2 lg:pr-4 xl:pr-12">
         <Image
           fill
+          sizes="100vw"
           src="/checkout-thank-you.jpg"
           alt="thank you for your order"
           className="h-full w-full object-center object-cover"
@@ -90,6 +91,7 @@ const ThankYouPage = async ({ searchParams }: PageProps) => {
                         {typeof image !== 'string' && image.url ? (
                           <Image
                             fill
+                            sizes="100vw"
                             src={image.url}
                             alt={`${product.name} image`}
                             className="flex-none rounded-md bg-gray-100 object-cover object-center"
