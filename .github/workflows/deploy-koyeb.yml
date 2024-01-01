@@ -1,15 +1,15 @@
 name: Deploy to Koyeb
 on: [push]
 
-env:
-  GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+# env:
+#   GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Docker login
-        run: echo $GHCR_TOKEN | docker login ghcr.io -u matsukenbass --password-stdin
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u matsukenbass --password-stdin
       - name: Build and push container image to registry
         uses: docker/build-push-action@v3
         with:
