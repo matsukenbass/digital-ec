@@ -28,7 +28,7 @@ export function formatPrice(
 export function constructMetadata({
   title = 'DigitalEC - the marketplace for digital assets',
   description = 'DigitalEC is an open-source marketplace for high-quality digital goods.',
-  image = '/thumbnail.png',
+  image = '/thumbnail.jpg',
   icons = '/favicon.ico',
   noIndex = false,
 }: {
