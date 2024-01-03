@@ -26,10 +26,10 @@ export function formatPrice(
 }
 
 export function constructMetadata({
-  title = 'DigitalEC - the marketplace for digital assets',
-  description = 'DigitalEC is an open-source marketplace for high-quality digital goods.',
-  image = '/thumbnail.jpg',
-  icons = '/favicon.ico',
+  title = 'makemoke - the marketplace for digital assets',
+  description = 'makemoke is an open-source marketplace for high-quality digital goods.',
+  image = '/asset/logo.png',
+  icons = '/asset/favicon.png',
   noIndex = false,
 }: {
   title?: string;

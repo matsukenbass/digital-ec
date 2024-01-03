@@ -26,9 +26,9 @@ export default buildConfig({
     user: 'users',
     bundler: webpackBundler(),
     meta: {
-      titleSuffix: '- DigitalEC',
-      favicon: '/favicon.ico',
-      ogImage: '/thumbnail.jpg',
+      titleSuffix: '- makemoke',
+      favicon: '/asset/favicon.png',
+      ogImage: '/asset/logo.png',
     },
   },
   rateLimit: {
