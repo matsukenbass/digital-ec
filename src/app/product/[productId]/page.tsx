@@ -2,12 +2,14 @@ import AddToCartButton from '@/components/AddToCartButton';
 import ImageSlider from '@/components/ImageSlider';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import ProductReel from '@/components/ProductReel';
+import PlayerModal from '@/components/PlayerModal';
 import { PRODUCT_CATEGORIES } from '@/config';
 import { getPayloadClient } from '@/get-payload';
 import { formatPrice } from '@/lib/utils';
 import { Check, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { getObjects } from '@/lib/s3';
 
 interface PageProps {
   params: {
@@ -21,6 +23,7 @@ const BREADCRUMBS = [
 ];
 
 const Page = async ({ params }: PageProps) => {
+  const objects = await getObjects('2023-autumn-pp-daydream-pop-for-listening');
   const { productId } = params;
   const payload = await getPayloadClient();
   const { docs: products } = await payload.find({
@@ -93,6 +96,9 @@ const Page = async ({ params }: PageProps) => {
               <div className="mt-6 flex items-center">
                 <Check aria-hidden="true" className="h-5 w-5 shrink-0 text-green-500" />
                 <p className="ml-2 text-sm text-muted-foreground">Eligible instant delivery</p>
+              </div>
+              <div>
+                <PlayerModal objects={objects!} validUrls={validUrls} />
               </div>
             </section>
           </div>

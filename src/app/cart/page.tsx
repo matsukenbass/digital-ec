@@ -51,7 +51,7 @@ const Page = () => {
                     sizes="100vw"
                     loading="eager"
                     alt="empty shopping cat hippo"
-                  ></Image>
+                  />
                 </div>
                 <h3 className="text-2xl font-semibold">Your cart is empty</h3>
                 <p className="text-center text-muted-foreground">
