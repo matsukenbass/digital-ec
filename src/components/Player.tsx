@@ -91,18 +91,18 @@ export default function Player({
   const [paused, setPaused] = useState(false);
   const [volume, setVolume] = useState<number>(30);
   const [duration, setDuration] = useState(-1); // FIXME:ファイルの再生時間を取得して格納する
-  const [url, setUrl] = useState(`https://${bucket}.s3.ap-northeast-1.amazonaws.com/${fileName}`);
+  const [url, setUrl] = useState(`${process.env.NEXT_PUBLIC_SERVER_URL}/audio/${fileName}`);
 
   // const metadata = getMetadata(url); //TODO:呼び出そうとバグるからDynamoDBに一回入れる必要あるかも
   // console.log(metadata);
 
   const handleFileChange = useCallback(() => {
-    if (url !== `https://${bucket}.s3.ap-northeast-1.amazonaws.com/${fileName}`) {
-      setUrl(`https://${bucket}.s3.ap-northeast-1.amazonaws.com/${fileName}`);
+    if (url !== `${process.env.NEXT_PUBLIC_SERVER_URL}/audio/${fileName}`) {
+      setUrl(`${process.env.NEXT_PUBLIC_SERVER_URL}/audio/${fileName}`);
       setPaused(false);
       setPosition(0);
     }
-  }, [bucket, fileName, url]);
+  }, [fileName, url]);
 
   useEffect(() => {
     if (position === duration) {
@@ -123,7 +123,6 @@ export default function Player({
 
   const handleDuration = (value: number) => {
     setDuration(value);
-    console.log(value);
   };
 
   function formatDuration(value: number) {

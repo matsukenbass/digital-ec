@@ -3,6 +3,7 @@ import {
   // This command supersedes the ListObjectsCommand and is the recommended way to list objects.
   ListObjectsV2Command,
   _Object,
+  GetObjectCommand,
 } from '@aws-sdk/client-s3';
 
 const client = new S3Client({
@@ -33,6 +34,19 @@ export const getObjects = async (bucketName: string) => {
       command.input.ContinuationToken = NextContinuationToken;
     }
     return contents;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getObjectByFilename = async (bucketName: string, filename: string) => {
+  const command = new GetObjectCommand({
+    Bucket: bucketName,
+    Key: filename,
+  });
+  try {
+    const response = await client.send(command);
+    return response;
   } catch (err) {
     console.error(err);
   }

@@ -1,42 +1,42 @@
 export const PRODUCT_CATEGORIES = [
   {
-    label: 'UI Kits',
-    value: 'ui_kits' as const,
+    label: 'Music',
+    value: 'music' as const,
     featured: [
       {
         name: 'Editor picks',
-        href: `/products?category=ui_kits`,
+        href: `/products?category=music`,
         imageSrc: '/nav/ui-kits/mixed.jpg',
       },
       {
         name: 'New Arrivals',
-        href: '/products?category=ui_kits&sort=desc',
+        href: '/products?category=music&sort=desc',
         imageSrc: '/nav/ui-kits/blue.jpg',
       },
       {
         name: 'Bestsellers',
-        href: '/products?category=ui_kits',
+        href: '/products?category=music',
         imageSrc: '/nav/ui-kits/purple.jpg',
       },
     ],
   },
   {
-    label: 'Icons',
-    value: 'icons' as const,
+    label: 'Books',
+    value: 'books' as const,
     featured: [
       {
-        name: 'Favorite Icon Picks',
-        href: `/products?category=icons`,
+        name: 'Favorite Book Picks',
+        href: `/products?category=books`,
         imageSrc: '/nav/icons/picks.jpg',
       },
       {
         name: 'New Arrivals',
-        href: '/products?category=icons&sort=desc',
+        href: '/products?category=books&sort=desc',
         imageSrc: '/nav/icons/new.jpg',
       },
       {
-        name: 'Bestselling Icons',
-        href: '/products?category=icons',
+        name: 'Bestselling Books',
+        href: '/products?category=books',
         imageSrc: '/nav/icons/bestsellers.jpg',
       },
     ],

@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
@@ -18,11 +17,12 @@ import { ScrollArea } from './ui/scroll-area';
 import { Separator } from './ui/separator';
 
 interface PlayerModalProps {
-  objects: _Object[];
+  // objects: _Object[];
   validUrls: string[];
+  audioFilenameList: string[];
 }
 
-const PlayerModal = ({ objects, validUrls }: PlayerModalProps) => {
+const PlayerModal = ({ validUrls, audioFilenameList }: PlayerModalProps) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
   const [fileId, setFileId] = useState(0);
@@ -31,13 +31,13 @@ const PlayerModal = ({ objects, validUrls }: PlayerModalProps) => {
     setFileId(id);
   };
   const handlePrev = (id: number) => {
-    if (id !== 0 && objects) {
-      handleSelectSoundFile(objects[id - 1].Key ?? '', id - 1);
+    if (id !== 0 && audioFilenameList) {
+      handleSelectSoundFile(audioFilenameList[id - 1] ?? '', id - 1);
     }
   };
   const handleNext = (id: number) => {
-    if (objects && id !== objects?.length - 1) {
-      handleSelectSoundFile(objects[id + 1].Key ?? '', id + 1);
+    if (audioFilenameList && id !== audioFilenameList?.length - 1) {
+      handleSelectSoundFile(audioFilenameList[id + 1] ?? '', id + 1);
     }
   };
 
@@ -73,7 +73,7 @@ const PlayerModal = ({ objects, validUrls }: PlayerModalProps) => {
             <div>
               <div>
                 <Player
-                  bucket="2023-autumn-pp-daydream-pop-for-listening"
+                  bucket="digital-ec-audio-bucket"
                   fileName={selectedFileName ?? ''}
                   handleNext={handleNext}
                   handlePrev={handlePrev}
@@ -85,19 +85,19 @@ const PlayerModal = ({ objects, validUrls }: PlayerModalProps) => {
                 <ScrollArea className="rounded-md border">
                   <div className="p-4">
                     <h4 className="mb-4 text-sm font-medium leading-none">Music List</h4>
-                    {objects.map((item, id) => (
+                    {audioFilenameList.map((item, id) => (
                       <>
                         <div
                           key={id}
                           className="text-sm"
-                          onClick={() => handleSelectSoundFile(item.Key ?? '', id)}
+                          onClick={() => handleSelectSoundFile(item ?? '', id)}
                         >
-                          {item.Key === selectedFileName ? (
+                          {item === selectedFileName ? (
                             <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-green-500">
-                              <span className="relative font-bold text-white">{item.Key}</span>
+                              <span className="relative font-bold text-white">{item}</span>
                             </span>
                           ) : (
-                            <span>{item.Key}</span>
+                            <span>{item}</span>
                           )}
                         </div>
                         <Separator className="my-2" />

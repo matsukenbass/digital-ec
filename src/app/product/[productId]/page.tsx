@@ -9,7 +9,7 @@ import { formatPrice } from '@/lib/utils';
 import { Check, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getObjects } from '@/lib/s3';
+import { Audio } from '../../../payload-types';
 
 interface PageProps {
   params: {
@@ -23,7 +23,6 @@ const BREADCRUMBS = [
 ];
 
 const Page = async ({ params }: PageProps) => {
-  const objects = await getObjects('2023-autumn-pp-daydream-pop-for-listening');
   const { productId } = params;
   const payload = await getPayloadClient();
   const { docs: products } = await payload.find({
@@ -39,8 +38,14 @@ const Page = async ({ params }: PageProps) => {
     },
   });
   const [product] = products;
+  const filenameList = product.playlist
+    ? product.playlist.map((item) => {
+        return (item.audio as Audio).filename as string;
+      })
+    : [];
 
   if (!product) return notFound(); //404
+  console.log(filenameList);
 
   const validUrls = product.images
     .map(({ image }) => (typeof image === 'string' ? image : image.url))
@@ -98,7 +103,9 @@ const Page = async ({ params }: PageProps) => {
                 <p className="ml-2 text-sm text-muted-foreground">Eligible instant delivery</p>
               </div>
               <div>
-                <PlayerModal objects={objects!} validUrls={validUrls} />
+                {filenameList.length !== 0 ? (
+                  <PlayerModal validUrls={validUrls} audioFilenameList={filenameList} />
+                ) : null}
               </div>
             </section>
           </div>

@@ -161,6 +161,26 @@ export const Products: CollectionConfig = {
       hasMany: false,
     },
     {
+      name: 'playlist',
+      type: 'array',
+      label: 'Product audio',
+      minRows: 1,
+      maxRows: 10,
+      required: false,
+      labels: {
+        singular: 'Audio',
+        plural: 'Audios',
+      },
+      fields: [
+        {
+          name: 'audio',
+          type: 'upload',
+          relationTo: 'audio',
+          required: true,
+        },
+      ],
+    },
+    {
       name: 'approvedForSale',
       label: 'Product Status',
       type: 'select',

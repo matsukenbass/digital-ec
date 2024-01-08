@@ -60,8 +60,6 @@ export const ProductFiles: CollectionConfig = {
     create: ({ req }) => req.user.role === 'admin',
   },
   upload: {
-    staticURL: '/product_files', //保存先をS3(Wasabi)に変更する
-    staticDir: 'product_files',
     mimeTypes: ['image/*', 'font/*', 'application/postscript'],
   },
   fields: [

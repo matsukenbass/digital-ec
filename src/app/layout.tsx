@@ -12,7 +12,7 @@ export const metadata = constructMetadata();
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="ja" className="h-full">
       <body className={cn('relative h-full font-sans antialiased', inter.className)}>
         <main className="relative flex min-h-screen flex-col">
           <Providers>

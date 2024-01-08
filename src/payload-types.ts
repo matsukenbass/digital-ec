@@ -13,6 +13,7 @@ export interface Config {
     media: Media;
     product_files: ProductFile;
     orders: Order;
+    audio: Audio;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -42,8 +43,14 @@ export interface Product {
   name: string;
   description?: string | null;
   price: number;
-  category: 'ui_kits' | 'icons';
+  category: 'music' | 'books';
   product_files: string | ProductFile;
+  playlist?:
+    | {
+        audio: string | Audio;
+        id?: string | null;
+      }[]
+    | null;
   approvedForSale?: ('pending' | 'approved' | 'denied') | null;
   priceId?: string | null;
   stripeId?: string | null;
@@ -55,6 +62,18 @@ export interface Product {
   createdAt: string;
 }
 export interface ProductFile {
+  id: string;
+  user?: (string | null) | User;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+}
+export interface Audio {
   id: string;
   user?: (string | null) | User;
   updatedAt: string;
