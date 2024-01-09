@@ -103,7 +103,16 @@ const Page = async ({ params }: PageProps) => {
               </div>
               <div>
                 {audioFilenameList.length !== 0 ? (
-                  <PlayerModal validUrls={validUrls} audioFilenameList={audioFilenameList} />
+                  <PlayerModal
+                    validUrls={validUrls}
+                    audioFilenameList={audioFilenameList}
+                    productName={product.name}
+                    productOwner={
+                      typeof product?.user !== 'string'
+                        ? product?.user?.email.split('@')[0] ?? 'Jane Doe'
+                        : product?.user ?? 'Jane Doe'
+                    }
+                  />
                 ) : null}
               </div>
             </section>

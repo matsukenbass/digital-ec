@@ -17,12 +17,18 @@ import { ScrollArea } from './ui/scroll-area';
 import { Separator } from './ui/separator';
 
 interface PlayerModalProps {
-  // objects: _Object[];
   validUrls: string[];
   audioFilenameList: string[];
+  productName: string;
+  productOwner: string;
 }
 
-const PlayerModal = ({ validUrls, audioFilenameList }: PlayerModalProps) => {
+const PlayerModal = ({
+  validUrls,
+  audioFilenameList,
+  productName,
+  productOwner,
+}: PlayerModalProps) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
   const [fileId, setFileId] = useState(0);
@@ -79,6 +85,8 @@ const PlayerModal = ({ validUrls, audioFilenameList }: PlayerModalProps) => {
                   handlePrev={handlePrev}
                   fileId={fileId}
                   imageUrl={validUrls[0]}
+                  productName={productName}
+                  productOwner={productOwner}
                 />
               </div>
               <div>
@@ -86,9 +94,8 @@ const PlayerModal = ({ validUrls, audioFilenameList }: PlayerModalProps) => {
                   <div className="p-4">
                     <h4 className="mb-4 text-sm font-medium leading-none">Music List</h4>
                     {audioFilenameList.map((item, id) => (
-                      <>
+                      <div key={id}>
                         <div
-                          key={id}
                           className="text-sm"
                           onClick={() => handleSelectSoundFile(item ?? '', id)}
                         >
@@ -101,7 +108,7 @@ const PlayerModal = ({ validUrls, audioFilenameList }: PlayerModalProps) => {
                           )}
                         </div>
                         <Separator className="my-2" />
-                      </>
+                      </div>
                     ))}
                   </div>
                 </ScrollArea>

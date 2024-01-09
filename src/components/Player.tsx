@@ -21,6 +21,8 @@ type Props = {
   bucket?: string;
   fileName: string;
   imageUrl?: string;
+  productName: string;
+  productOwner: string;
   handleNext: (id: number) => void;
   handlePrev: (id: number) => void;
   fileId: number;
@@ -78,6 +80,8 @@ export default function Player({
   handlePrev,
   fileId,
   imageUrl,
+  productName,
+  productOwner,
   onPlay,
   onPause,
   onStart,
@@ -90,11 +94,8 @@ export default function Player({
   const [position, setPosition] = useState(0);
   const [paused, setPaused] = useState(false);
   const [volume, setVolume] = useState<number>(30);
-  const [duration, setDuration] = useState(-1); // FIXME:ファイルの再生時間を取得して格納する
+  const [duration, setDuration] = useState(0); // FIXME:ファイルの再生時間を取得して格納する
   const [url, setUrl] = useState(`${process.env.NEXT_PUBLIC_SERVER_URL}/audio/${fileName}`);
-
-  // const metadata = getMetadata(url); //TODO:呼び出そうとバグるからDynamoDBに一回入れる必要あるかも
-  // console.log(metadata);
 
   const handleFileChange = useCallback(() => {
     if (url !== `${process.env.NEXT_PUBLIC_SERVER_URL}/audio/${fileName}`) {
@@ -106,13 +107,14 @@ export default function Player({
 
   useEffect(() => {
     if (position === duration) {
+      setPosition(0);
       handleNext(fileId);
     }
-  });
+  }, [duration, fileId, handleNext, position]);
 
   useEffect(() => {
     handleFileChange();
-  }, [bucket, fileName, handleFileChange]);
+  }, [handleFileChange]);
 
   const playerRef = useRef<ReactPlayer>(null);
 
@@ -158,13 +160,13 @@ export default function Player({
           ) : null}
           <Box sx={{ ml: 1.5, minWidth: 0 }}>
             <Typography variant="caption" color="text.secondary" fontWeight={500}>
-              PsychoPhysics
+              {productOwner}
             </Typography>
             <Typography noWrap>
               <b>{fileName?.split('.').slice(0, -1).join('.')}</b>
             </Typography>
             <Typography noWrap letterSpacing={-0.25}>
-              デイドリーム・ポップ
+              {productName}
             </Typography>
           </Box>
         </Box>
