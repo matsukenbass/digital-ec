@@ -29,7 +29,7 @@ export function constructMetadata({
   title = 'makemoke - the marketplace for digital assets',
   description = 'makemoke is an open-source marketplace for high-quality digital goods.',
   image = '/asset/logo.png',
-  icons = '/asset/favicon.png',
+  icons = '/favicon.ico',
   noIndex = false,
 }: {
   title?: string;
