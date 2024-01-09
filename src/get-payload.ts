@@ -42,7 +42,7 @@ export const getPayloadClient = async ({ initOptions }: Args = {}): Promise<Payl
       email: {
         transport: transporter,
         fromAddress: 'onboarding@resend.dev',
-        fromName: 'DigitalEC',
+        fromName: 'makemoke',
       },
       secret: process.env.PAYLOAD_SECRET,
       local: initOptions?.express ? false : true,

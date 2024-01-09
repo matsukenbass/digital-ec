@@ -34,7 +34,7 @@ export const ReceiptEmail = ({ email, date, orderId, products }: ReceiptEmailPro
   return (
     <Html>
       <Head />
-      <Preview>Your DigitalEC Receipt</Preview>
+      <Preview>Your makemoke Receipt</Preview>
 
       <Body style={main}>
         <Container style={container}>
@@ -44,7 +44,7 @@ export const ReceiptEmail = ({ email, date, orderId, products }: ReceiptEmailPro
                 src={`${process.env.NEXT_PUBLIC_SERVER_URL}/hippo-email-sent.png`}
                 width="100"
                 height="100"
-                alt="DigitalEC"
+                alt="makemoke"
               />
             </Column>
 
@@ -158,7 +158,7 @@ export const ReceiptEmail = ({ email, date, orderId, products }: ReceiptEmailPro
             <Link href="#">Privacy Policy </Link>
           </Text>
           <Text style={footerCopyright}>
-            Copyright © 2023 DigitalEC Inc. <br /> <Link href="#">All rights reserved</Link>
+            Copyright © 2023 makemoke Inc. <br /> <Link href="#">All rights reserved</Link>
           </Text>
         </Container>
       </Body>
