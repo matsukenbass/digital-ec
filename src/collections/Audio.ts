@@ -25,17 +25,17 @@ export const Audio: CollectionConfig = {
         return { ...data, user: req.user?.id };
       },
     ],
-    beforeOperation: [
-      async ({ args, operation }) => {
-        if (operation === 'create' || operation === 'update') {
-          const files = args.req?.files;
-          if (files && files.file && files.file.name) {
-            const utf8Content = iconv.decode(files.file.name, 'utf-8');
-            files.file.name = utf8Content;
-          }
-        }
-      },
-    ],
+    // beforeOperation: [
+    //   async ({ args, operation }) => {
+    //     if (operation === 'create' || operation === 'update') {
+    //       const files = args.req?.files;
+    //       if (files && files.file && files.file.name) {
+    //         const utf8Content = iconv.decode(files.file.name, 'utf-8');
+    //         files.file.name = utf8Content;
+    //       }
+    //     }
+    //   },
+    // ],
   },
   access: {
     read: async ({ req }) => {

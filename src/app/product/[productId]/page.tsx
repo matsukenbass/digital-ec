@@ -38,14 +38,13 @@ const Page = async ({ params }: PageProps) => {
     },
   });
   const [product] = products;
-  const filenameList = product.playlist
+  const audioFilenameList = product.playlist
     ? product.playlist.map((item) => {
         return (item.audio as Audio).filename as string;
       })
     : [];
 
   if (!product) return notFound(); //404
-  console.log(filenameList);
 
   const validUrls = product.images
     .map(({ image }) => (typeof image === 'string' ? image : image.url))
@@ -103,8 +102,8 @@ const Page = async ({ params }: PageProps) => {
                 <p className="ml-2 text-sm text-muted-foreground">Eligible instant delivery</p>
               </div>
               <div>
-                {filenameList.length !== 0 ? (
-                  <PlayerModal validUrls={validUrls} audioFilenameList={filenameList} />
+                {audioFilenameList.length !== 0 ? (
+                  <PlayerModal validUrls={validUrls} audioFilenameList={audioFilenameList} />
                 ) : null}
               </div>
             </section>
