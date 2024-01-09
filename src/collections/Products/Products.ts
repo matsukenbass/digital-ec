@@ -165,7 +165,7 @@ export const Products: CollectionConfig = {
       type: 'array',
       label: 'Product audio',
       minRows: 1,
-      maxRows: 10,
+      maxRows: 15,
       required: false,
       labels: {
         singular: 'Audio',
