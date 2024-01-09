@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, useState, useEffect, useCallback } from 'react';
 import ReactPlayer from 'react-player';
 import * as musicMetadata from 'music-metadata-browser';
@@ -73,7 +75,7 @@ const TinyText = styled(Typography)({
   letterSpacing: 0.2,
 });
 
-export default function Player({
+const Player = ({
   bucket,
   fileName,
   handleNext,
@@ -85,14 +87,14 @@ export default function Player({
   onPlay,
   onPause,
   onStart,
-}: Props) {
+}: Props) => {
   /**
    * [] メタデータ(アーティスト情報・アルバム名・画像)を表示
    * [] 名前をクリックすると再生
    */
   const theme = useTheme();
   const [position, setPosition] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [paused, setPaused] = useState(true);
   const [volume, setVolume] = useState<number>(30);
   const [duration, setDuration] = useState(0); // FIXME:ファイルの再生時間を取得して格納する
   const [url, setUrl] = useState(`${process.env.NEXT_PUBLIC_SERVER_URL}/audio/${fileName}`);
@@ -106,15 +108,15 @@ export default function Player({
   }, [fileName, url]);
 
   useEffect(() => {
-    if (position === duration) {
+    if (position === duration && position !== 0) {
       setPosition(0);
       handleNext(fileId);
     }
-  }, [duration, fileId, handleNext, position]);
+  }, [duration, fileId, position, handleNext]);
 
   useEffect(() => {
     handleFileChange();
-  }, [handleFileChange]);
+  }, [bucket, fileName, handleFileChange]);
 
   const playerRef = useRef<ReactPlayer>(null);
 
@@ -268,4 +270,6 @@ export default function Player({
       {/* <WallPaper /> */}
     </Box>
   );
-}
+};
+
+export default Player;

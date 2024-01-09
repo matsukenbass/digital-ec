@@ -30,7 +30,7 @@ const PlayerModal = ({
   productOwner,
 }: PlayerModalProps) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(audioFilenameList[0]);
   const [fileId, setFileId] = useState(0);
   const handleSelectSoundFile = (fileName: string, id: number) => {
     setSelectedFileName(fileName);
@@ -62,7 +62,7 @@ const PlayerModal = ({
           <p className="ml-2 text-sm text-muted-foreground">視聴する</p>
         </div>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className="flex">
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader className="flex items-center">
             <div>
@@ -90,7 +90,7 @@ const PlayerModal = ({
                 />
               </div>
               <div>
-                <ScrollArea className="rounded-md border">
+                <ScrollArea className="h-48 rounded-md border">
                   <div className="p-4">
                     <h4 className="mb-4 text-sm font-medium leading-none">Music List</h4>
                     {audioFilenameList.map((item, id) => (
