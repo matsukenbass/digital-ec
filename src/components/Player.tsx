@@ -5,19 +5,12 @@ import ReactPlayer from 'react-player';
 import * as musicMetadata from 'music-metadata-browser';
 
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import IconButton from '@mui/material/IconButton';
-import Stack from '@mui/material/Stack';
-import PauseRounded from '@mui/icons-material/PauseRounded';
-import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
-import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
-import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
-import VolumeUpRounded from '@mui/icons-material/VolumeUpRounded';
-import VolumeDownRounded from '@mui/icons-material/VolumeDownRounded';
 import Image from 'next/image';
+import { FastForward, Pause, Play, Rewind, Volume1, Volume2 } from 'lucide-react';
 // import { getMetadata } from '@/app/_lib/metadata';
 type Props = {
   bucket?: string;
@@ -34,46 +27,14 @@ type Props = {
   onPause?: () => void;
 };
 
-export type TAudioMetaData = {
-  title: string;
-  album?: string | null;
-  artist?: string | null;
-  track?: number | null;
-  picture?: musicMetadata.IPicture[] | null;
-  genre?: string[] | null;
-};
-
-const Widget = styled('div')(({ theme }) => ({
-  padding: 16,
-  borderRadius: 16,
-  width: 343,
-  maxWidth: '100%',
-  margin: 'auto',
-  position: 'relative',
-  zIndex: 1,
-  backgroundColor: theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.4)',
-  backdropFilter: 'blur(40px)',
-}));
-
-const CoverImage = styled('div')({
-  width: 100,
-  height: 100,
-  objectFit: 'cover',
-  overflow: 'hidden',
-  flexShrink: 0,
-  borderRadius: 8,
-  backgroundColor: 'rgba(0,0,0,0.08)',
-  '& > img': {
-    width: '100%',
-  },
-});
-
-const TinyText = styled(Typography)({
-  fontSize: '0.75rem',
-  opacity: 0.38,
-  fontWeight: 500,
-  letterSpacing: 0.2,
-});
+// export type TAudioMetaData = {
+//   title: string;
+//   album?: string | null;
+//   artist?: string | null;
+//   track?: number | null;
+//   picture?: musicMetadata.IPicture[] | null;
+//   genre?: string[] | null;
+// };
 
 const Player = ({
   bucket,
@@ -134,12 +95,10 @@ const Player = ({
     const secondLeft = Math.floor(value - minute * 60);
     return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
   }
-  const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
-  const lightIconColor =
-    theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
+
   return (
-    <Box sx={{ width: '100%', overflow: 'hidden' }}>
-      <Box display="none">
+    <div className="w-full overflow-hidden">
+      <div className="hidden">
         <ReactPlayer
           url={url} //MEMO:GoogleDriveから取ってくるときは'https://drive.google.com/uc?id=1sDzBtne8T4HwGK2HCcelQQ4Zb3DnUfDV'みたいな感じ
           playing={!paused}
@@ -152,15 +111,15 @@ const Player = ({
           onProgress={(state) => setPosition(state.playedSeconds)}
           onDuration={(d) => handleDuration(d)}
         />
-      </Box>
-      <Widget>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      </div>
+      <div className="relative z-[1] m-auto w-[343px] max-w-full rounded-2xl bg-white/40 p-4 backdrop-blur-[40]">
+        <div className="flex items-center">
           {imageUrl ? (
-            <CoverImage>
+            <div className="h-[100px] w-[100px] shrink-0 overflow-hidden rounded-lg bg-black/[0.08] object-cover '& > img': {@apply w-full}">
               <Image width={100} height={100} alt={fileName} src={imageUrl} />
-            </CoverImage>
+            </div>
           ) : null}
-          <Box sx={{ ml: 1.5, minWidth: 0 }}>
+          <div className="ml-1.5 min-w-0">
             <Typography variant="caption" color="text.secondary" fontWeight={500}>
               {productOwner}
             </Typography>
@@ -170,8 +129,8 @@ const Player = ({
             <Typography noWrap letterSpacing={-0.25}>
               {productName}
             </Typography>
-          </Box>
-        </Box>
+          </div>
+        </div>
         <Slider
           // onChangeCommitted={playerRef?.current?.seekTo(position)}
           aria-label="time-indicator"
@@ -206,41 +165,27 @@ const Player = ({
             },
           }}
         />
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            mt: -2,
-          }}
-        >
-          <TinyText>{formatDuration(position)}</TinyText>
-          <TinyText>-{formatDuration(duration - position)}</TinyText>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            mt: -1,
-          }}
-        >
+        <div className="mt-[-8px] flex items-center justify-between">
+          <p className="text-xs font-medium tracking-tighter opacity-[38]">
+            {formatDuration(position)}
+          </p>
+          <p className="text-xs font-medium tracking-tighter opacity-[38]">
+            -{formatDuration(duration - position)}
+          </p>
+        </div>
+        <div className="mt-[-4px] flex items-center justify-center">
           <IconButton aria-label="previous song" onClick={() => handlePrev(fileId)}>
-            <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
+            <Rewind className="text-4xl" />
           </IconButton>
           <IconButton aria-label={paused ? 'play' : 'pause'} onClick={() => setPaused(!paused)}>
-            {paused ? (
-              <PlayArrowRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
-            ) : (
-              <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
-            )}
+            {paused ? <Play className="text-5xl" /> : <Pause className="text-5xl" />}
           </IconButton>
           <IconButton aria-label="next song" onClick={() => handleNext(fileId)}>
-            <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
+            <FastForward className="text-4xl" />
           </IconButton>
-        </Box>
-        <Stack spacing={2} direction="row" sx={{ mb: 1, px: 1 }} alignItems="center">
-          <VolumeDownRounded htmlColor={lightIconColor} />
+        </div>
+        <div className="mb-1 flex items-center justify-center space-x-2 px-1">
+          <Volume1 />
           <Slider
             aria-label="Volume"
             defaultValue={30}
@@ -264,11 +209,10 @@ const Player = ({
               },
             }}
           />
-          <VolumeUpRounded htmlColor={lightIconColor} />
-        </Stack>
-      </Widget>
-      {/* <WallPaper /> */}
-    </Box>
+          <Volume2 />
+        </div>
+      </div>
+    </div>
   );
 };
 
