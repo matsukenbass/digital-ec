@@ -14,7 +14,8 @@
     "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" dist/",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "type": "npx tsc -p . --noEmit"
+    "type": "npx tsc -p . --noEmit",
+    "test-ct": "playwright test -c playwright-ct.config.ts"
   },
   "resolutions": {
     "cliui": "7.0.2"
@@ -72,6 +73,7 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
+    "@playwright/experimental-ct-react": "^1.41.1",
     "@types/express": "^4.17.21",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.14",
