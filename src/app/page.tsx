@@ -6,21 +6,20 @@ import Link from 'next/link';
 
 const perks = [
   {
-    name: 'Instant Delivery',
+    name: '即納',
     Icon: ArrowDownToLine,
-    description: 'Get your assets delivered to your email in seconds and download them right away.',
+    description: '数秒でEメールに商品のダウンロードリンクが届き、すぐにダウンロードできます。',
   },
   {
-    name: 'Guaranteed Quality',
+    name: '品質保証',
     Icon: CheckCircle,
     description:
-      'Every asset on our platform is verified by our team to ensure our highest quality standards. Not happy? We offer a 30-day refund guarantee.',
+      '私たちのプラットフォーム上のすべての資産は、私たちの最高の品質基準を確保するために私たちのチームによって検証されています。ご不満ですか？30日間の返金保証を提供しています。',
   },
   {
-    name: 'For the Planet',
+    name: '環境保護',
     Icon: Leaf,
-    description:
-      "We've pledged 1% of sales to the preservation and restoration of the natural environment.",
+    description: '私たちは売上の1％を自然環境の保護と回復に寄付することを約束しています。',
   },
 ];
 
@@ -30,12 +29,10 @@ export default function Home() {
       <MaxWidthWrapper>
         <div className="mx-auto flex max-w-3xl flex-col items-center py-20 text-center">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            Your marketplace for high-quality <span className="text-green-600">digital assets</span>
-            .
+            <span className="text-green-600">デジタルオリジナルグッズ</span>のECサイトです。
           </h1>
           <p className="mt-6 max-w-prose text-lg text-muted-foreground">
-            Welcome to makemoke. Every asset on our platform is verified by our team to ensure our
-            highest quality standards.
+            makemokeのすべてのグッズは、私たちのチームによって検証されます。最高の品質基準を保証します。
           </p>
           <div className="mt-6 flex flex-col gap-4 sm:flex-row">
             <Link href="/products" className={buttonVariants()}>
@@ -48,7 +45,7 @@ export default function Home() {
         <ProductReel
           query={{ sort: 'desc', limit: 4 }}
           href="/products?sort=recent"
-          title="Brand new"
+          title="New Release"
         />
       </MaxWidthWrapper>
 

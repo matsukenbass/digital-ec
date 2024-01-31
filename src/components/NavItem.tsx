@@ -55,6 +55,7 @@ const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }: NavItemProp
                           fill
                           sizes="100vw"
                           className="object-cover object-center"
+                          priority
                         />
                       </div>
                       <Link href={item.href} className="mt-6 block font-medium text-gray-900">

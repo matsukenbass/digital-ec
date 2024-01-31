@@ -89,6 +89,7 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
               className="-z-10 h-full w-full object-cover object-center"
               src={url}
               alt="Product image"
+              priority
             />
           </SwiperSlide>
         ))}

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['digital-ec-matsukenbass.koyeb.app'],
+    minimumCacheTTL: 60,
     remotePatterns: [
       {
         protocol: 'http',

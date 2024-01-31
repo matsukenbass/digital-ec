@@ -15,6 +15,7 @@ import { _Object } from '@aws-sdk/client-s3';
 import { AudioLines, X } from 'lucide-react';
 import { ScrollArea } from './ui/scroll-area';
 import { Separator } from './ui/separator';
+import { cn } from '@/lib/utils';
 
 interface PlayerModalProps {
   validUrls: string[];
@@ -99,13 +100,14 @@ const PlayerModal = ({
                           className="text-sm"
                           onClick={() => handleSelectSoundFile(item ?? '', id)}
                         >
-                          {item === selectedFileName ? (
-                            <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-green-500">
-                              <span className="relative font-bold text-white">{item}</span>
-                            </span>
-                          ) : (
-                            <span>{item}</span>
-                          )}
+                          <span
+                            className={cn('text-black', {
+                              'animate-text-shadow-drop-br': item === selectedFileName,
+                              'font-bold': item === selectedFileName,
+                            })}
+                          >
+                            {item}
+                          </span>
                         </div>
                         <Separator className="my-2" />
                       </div>

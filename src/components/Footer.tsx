@@ -32,15 +32,14 @@ const Footer = () => {
                 </div>
 
                 <div className="relative mx-auto max-w-sm text-center">
-                  <h3 className="font-semibold text-gray-900">Become a seller</h3>
+                  <h3 className="font-semibold text-gray-900">販売するには</h3>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    If you&apos;d like to sell high-quality digital products, you can do so in
-                    minutes.{' '}
+                    すぐにあなたのデジタルオリジナルグッズを販売できます。
                     <Link
                       href="/sign-in?as=seller"
                       className="whitespace-nowrap font-medium text-black hover:text-zinc-900"
                     >
-                      Get started &rarr;
+                      グッズを販売する &rarr;
                     </Link>
                   </p>
                 </div>

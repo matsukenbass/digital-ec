@@ -89,6 +89,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
                               src={item.imageSrc}
                               alt="product category image"
                               className="object-cover object-center"
+                              priority
                             />
                           </div>
                           <Link href={item.href} className="mt-6 block font-medium text-gray-900">

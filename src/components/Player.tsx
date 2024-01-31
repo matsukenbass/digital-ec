@@ -11,7 +11,6 @@ import Slider from '@mui/material/Slider';
 import IconButton from '@mui/material/IconButton';
 import Image from 'next/image';
 import { FastForward, Pause, Play, Rewind, Volume1, Volume2 } from 'lucide-react';
-// import { getMetadata } from '@/app/_lib/metadata';
 type Props = {
   bucket?: string;
   fileName: string;
@@ -26,15 +25,6 @@ type Props = {
   onPlay?: () => void;
   onPause?: () => void;
 };
-
-// export type TAudioMetaData = {
-//   title: string;
-//   album?: string | null;
-//   artist?: string | null;
-//   track?: number | null;
-//   picture?: musicMetadata.IPicture[] | null;
-//   genre?: string[] | null;
-// };
 
 const Player = ({
   bucket,
@@ -110,13 +100,15 @@ const Player = ({
           // onSeek={(state) => setPosition(state)}
           onProgress={(state) => setPosition(state.playedSeconds)}
           onDuration={(d) => handleDuration(d)}
+          lazy
+          preload="auto"
         />
       </div>
       <div className="relative z-[1] m-auto w-[343px] max-w-full rounded-2xl bg-white/40 p-4 backdrop-blur-[40]">
         <div className="flex items-center">
           {imageUrl ? (
             <div className="h-[100px] w-[100px] shrink-0 overflow-hidden rounded-lg bg-black/[0.08] object-cover '& > img': {@apply w-full}">
-              <Image width={100} height={100} alt={fileName} src={imageUrl} />
+              <Image width={100} height={100} alt={fileName} src={imageUrl} priority={true} />
             </div>
           ) : null}
           <div className="ml-1.5 min-w-0">

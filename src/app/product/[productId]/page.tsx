@@ -22,7 +22,7 @@ const BREADCRUMBS = [
   { id: 2, name: 'Products', href: '/products' },
 ];
 
-const Page = async ({ params }: PageProps) => {
+export const ProductPage = async ({ params }: PageProps) => {
   const { productId } = params;
   const payload = await getPayloadClient();
   const { docs: products } = await payload.find({
@@ -149,4 +149,4 @@ const Page = async ({ params }: PageProps) => {
   );
 };
 
-export default Page;
+export default ProductPage;
