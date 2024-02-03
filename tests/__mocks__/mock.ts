@@ -11,9 +11,9 @@ export const trpcMswHandlerFactory = <
   type?: 'query' | 'mutation';
 }) => {
   const fn = endpoint.type === 'mutation' ? http.post : http.get;
-  const route = `${process.env.NEXT_PUBLIC_SERVER_URL || ''}${'/api/trpc/'}${String(
-    endpoint.path[0]
-  )}.${endpoint.path[1] as string}`;
+  const route = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/trpc/${String(endpoint.path[0])}.${
+    endpoint.path[1] as string
+  }`;
   return fn(route, () => {
     return HttpResponse.json({ result: { data: endpoint.response } });
   });
