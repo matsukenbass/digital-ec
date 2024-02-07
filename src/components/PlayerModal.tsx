@@ -22,7 +22,7 @@ interface PlayerModalProps {
   audioFilenameList: string[];
   productName: string;
   productOwner: string;
-  metadata: { [k: string]: string };
+  metadata: { [k: string]: string }[];
 }
 
 const PlayerModal = ({
@@ -91,7 +91,7 @@ const PlayerModal = ({
                   imageUrl={validUrls[0]}
                   productName={productName}
                   productOwner={productOwner}
-                  metadata={metadata}
+                  metadata={metadata[fileId]}
                 />
               </div>
               <div>

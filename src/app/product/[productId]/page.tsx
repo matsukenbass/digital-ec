@@ -55,8 +55,8 @@ const Page = async ({ params }: PageProps) => {
 
   const results: any = [];
   for (const item of audioFilenameList) {
-    const result = await getDataById(item);
-    results.push(result);
+    const result: any = await getDataById(item);
+    results.push(result[0]);
   }
 
   // TypeScriptのオブジェクトからSに対するvalueのみ取り出す関数
@@ -66,7 +66,7 @@ const Page = async ({ params }: PageProps) => {
     return Object.fromEntries(keys.map((key, index) => [key, vals[index]]));
   };
 
-  const metadata = extractSValues(results[0][0]);
+  const metadata = results.map((item: Record<string, { S: string }>) => extractSValues(item));
 
   return (
     <MaxWidthWrapper className="bg-white">
