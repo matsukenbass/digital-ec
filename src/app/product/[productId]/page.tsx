@@ -67,7 +67,6 @@ const Page = async ({ params }: PageProps) => {
   };
 
   const metadata = extractSValues(results[0][0]);
-  console.log(metadata);
 
   return (
     <MaxWidthWrapper className="bg-white">

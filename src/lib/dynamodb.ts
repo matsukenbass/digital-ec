@@ -17,8 +17,6 @@ export async function getDataById(itemId: string) {
     const command = new QueryCommand(params);
     const response = await client.send(command);
 
-    // Process the retrieved item as needed
-    console.log('Retrieved item:', response.Items);
     return response.Items;
   } catch (error) {
     console.error('Error getting item:', error);
