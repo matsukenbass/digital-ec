@@ -10,6 +10,7 @@ import { Check, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Audio } from '../../../payload-types';
+import { getDataById } from '@/lib/dynamodb';
 
 interface PageProps {
   params: {
@@ -51,6 +52,22 @@ const Page = async ({ params }: PageProps) => {
     .filter(Boolean) as string[];
 
   const label = PRODUCT_CATEGORIES.find(({ value }) => value === product.category)?.label;
+
+  const results: any = [];
+  for (const item of audioFilenameList) {
+    const result = await getDataById(item);
+    results.push(result);
+  }
+
+  // TypeScriptのオブジェクトからSに対するvalueのみ取り出す関数
+  const extractSValues = (obj: Record<string, { S: string }>): { [k: string]: string } => {
+    const keys = Object.keys(obj);
+    const vals = Object.values(obj).map((value) => value.S);
+    return Object.fromEntries(keys.map((key, index) => [key, vals[index]]));
+  };
+
+  const metadata = extractSValues(results[0][0]);
+  console.log(metadata);
 
   return (
     <MaxWidthWrapper className="bg-white">
@@ -112,6 +129,7 @@ const Page = async ({ params }: PageProps) => {
                         ? product?.user?.email.split('@')[0] ?? 'Jane Doe'
                         : product?.user ?? 'Jane Doe'
                     }
+                    metadata={metadata}
                   />
                 ) : null}
               </div>

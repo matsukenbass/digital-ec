@@ -22,6 +22,7 @@ interface PlayerModalProps {
   audioFilenameList: string[];
   productName: string;
   productOwner: string;
+  metadata: { [k: string]: string };
 }
 
 const PlayerModal = ({
@@ -29,6 +30,7 @@ const PlayerModal = ({
   audioFilenameList,
   productName,
   productOwner,
+  metadata,
 }: PlayerModalProps) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(audioFilenameList[0]);
@@ -55,6 +57,7 @@ const PlayerModal = ({
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
   return (
     <Drawer>
       <DrawerTrigger>
@@ -88,6 +91,7 @@ const PlayerModal = ({
                   imageUrl={validUrls[0]}
                   productName={productName}
                   productOwner={productOwner}
+                  metadata={metadata}
                 />
               </div>
               <div>

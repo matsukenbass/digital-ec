@@ -2,7 +2,6 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 import ReactPlayer from 'react-player';
-import * as musicMetadata from 'music-metadata-browser';
 
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
@@ -20,6 +19,7 @@ type Props = {
   handleNext: (id: number) => void;
   handlePrev: (id: number) => void;
   fileId: number;
+  metadata: { [k: string]: string };
   // seconds?: number;
   onStart?: () => void;
   onPlay?: () => void;
@@ -35,6 +35,7 @@ const Player = ({
   imageUrl,
   productName,
   productOwner,
+  metadata,
   onPlay,
   onPause,
   onStart,
@@ -113,13 +114,13 @@ const Player = ({
           ) : null}
           <div className="ml-1.5 min-w-0">
             <Typography variant="caption" color="text.secondary" fontWeight={500}>
-              {productOwner}
+              {metadata.artist}
             </Typography>
             <Typography noWrap>
               <b>{fileName?.split('.').slice(0, -1).join('.')}</b>
             </Typography>
             <Typography noWrap letterSpacing={-0.25}>
-              {productName}
+              {metadata.album}
             </Typography>
           </div>
         </div>
