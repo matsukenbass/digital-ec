@@ -58,7 +58,7 @@ export default buildConfig({
               },
               region: process.env.AWS_REGION,
             },
-            bucket: 'digital-ec-media-bucket',
+            bucket: 'digital-ec-iac-makemoke-media-485434730704',
           }),
         },
         product_files: {
@@ -72,7 +72,7 @@ export default buildConfig({
               },
               region: process.env.AWS_REGION,
             },
-            bucket: 'digital-ec-product-files-bucket',
+            bucket: 'digital-ec-iac-makemoke-product-files-485434730704',
           }),
         },
         audio: {
@@ -86,7 +86,7 @@ export default buildConfig({
               },
               region: process.env.AWS_REGION,
             },
-            bucket: 'digital-ec-audio-bucket',
+            bucket: 'digital-ec-iac-makemoke-audio-485434730704',
           }),
         },
       },

@@ -20,6 +20,9 @@ env:
   S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
   NEXT_PUBLIC_AWS_ACCESS_KEY: ${{vars.NEXT_PUBLIC_AWS_ACCESS_KEY}}
   NEXT_PUBLIC_AWS_SECRET: ${{secrets.NEXT_PUBLIC_AWS_SECRET}}
+  AUDIO_BUCKET: ${{vars.AUDIO_BUCKET}}
+  MEDIA_BUCKET: ${{vars.MEDIA_BUCKET}}
+  PRODUCT_FILES_BUCKET: ${{vars.PRODUCT_FILES_BUCKET}}
 
 jobs:
   test:
@@ -49,6 +52,9 @@ jobs:
           S3_SECRET_ACCESS_KEY: ${{env.S3_SECRET_ACCESS_KEY}}
           NEXT_PUBLIC_AWS_ACCESS_KEY: ${{env.NEXT_PUBLIC_AWS_ACCESS_KEY}}
           NEXT_PUBLIC_AWS_SECRET: ${{env.NEXT_PUBLIC_AWS_SECRET}}
+          AUDIO_BUCKET: ${{env.AUDIO_BUCKET}}
+          MEDIA_BUCKET: ${{env.MEDIA_BUCKET}}
+          PRODUCT_FILES_BUCKET: ${{env.PRODUCT_FILES_BUCKET}}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -79,6 +85,9 @@ jobs:
             "S3_SECRET_ACCESS_KEY=${{env.S3_SECRET_ACCESS_KEY}}"
             "NEXT_PUBLIC_AWS_ACCESS_KEY=${{env.NEXT_PUBLIC_AWS_ACCESS_KEY}}"
             "NEXT_PUBLIC_AWS_SECRET=${{env.NEXT_PUBLIC_AWS_SECRET}}"
+            "AUDIO_BUCKET=${{env.AUDIO_BUCKET}}"
+            "MEDIA_BUCKET=${{env.MEDIA_BUCKET}}"
+            "PRODUCT_FILES_BUCKET=${{env.PRODUCT_FILES_BUCKET}}"
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
