@@ -76,6 +76,7 @@ export interface ProductFile {
 export interface Audio {
   id: string;
   user?: (string | null) | User;
+  originalFilename?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;

@@ -1,6 +1,6 @@
 import { User } from '@/payload-types';
 import { Access, CollectionConfig } from 'payload/types';
-import * as iconv from 'iconv-lite';
+import cuid from 'cuid';
 
 const isAdminOrHasAccessToAudio =
   (): Access =>
@@ -21,21 +21,15 @@ export const Audio: CollectionConfig = {
   hooks: {
     beforeChange: [
       ({ req, data }) => {
-        // addUser
-        return { ...data, user: req.user?.id };
+        // addUser and original filename
+        return {
+          ...data,
+          filename: cuid(), //S3に格納する時のID（CMSではfilename扱い）
+          user: req.user?.id,
+          originalFilename: req.files?.file.name,
+        };
       },
     ],
-    // beforeOperation: [
-    //   async ({ args, operation }) => {
-    //     if (operation === 'create' || operation === 'update') {
-    //       const files = args.req?.files;
-    //       if (files && files.file && files.file.name) {
-    //         const utf8Content = iconv.decode(files.file.name, 'utf-8');
-    //         files.file.name = utf8Content;
-    //       }
-    //     }
-    //   },
-    // ],
   },
   access: {
     read: async ({ req }) => {
@@ -59,6 +53,14 @@ export const Audio: CollectionConfig = {
       relationTo: 'users',
       required: true,
       hasMany: false,
+      admin: {
+        condition: () => false,
+      },
+    },
+    {
+      name: 'originalFilename',
+      type: 'text',
+      required: true,
       admin: {
         condition: () => false,
       },

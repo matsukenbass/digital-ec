@@ -44,6 +44,11 @@ const Page = async ({ params }: PageProps) => {
         return (item.audio as Audio).filename as string;
       })
     : [];
+  const originalFilenameList = product.playlist
+    ? product.playlist.map((item) => {
+        return (item.audio as Audio).originalFilename as string;
+      })
+    : [];
 
   if (!product) return notFound(); //404
 
@@ -63,10 +68,16 @@ const Page = async ({ params }: PageProps) => {
   const extractSValues = (obj: Record<string, { S: string }>): { [k: string]: string } => {
     const keys = Object.keys(obj);
     const vals = Object.values(obj).map((value) => value.S);
-    return Object.fromEntries(keys.map((key, index) => [key, vals[index]]));
+    const data = Object.fromEntries(keys.map((key, index) => [key, vals[index]]));
+    return data;
   };
 
-  const metadata = results.map((item: Record<string, { S: string }>) => extractSValues(item));
+  const metadata = results.map((item: Record<string, { S: string }>) => {
+    const extracted = extractSValues(item);
+    return { ...extracted, original: originalFilenameList[results.indexOf(item)] };
+  });
+
+  console.log(metadata);
 
   return (
     <MaxWidthWrapper className="bg-white">
@@ -122,6 +133,7 @@ const Page = async ({ params }: PageProps) => {
                   <PlayerModal
                     validUrls={validUrls}
                     audioFilenameList={audioFilenameList}
+                    originalFilenameList={originalFilenameList}
                     productName={product.name}
                     productOwner={
                       typeof product?.user !== 'string'

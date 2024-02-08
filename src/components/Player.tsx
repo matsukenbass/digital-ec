@@ -11,16 +11,10 @@ type Props = {
   bucket?: string;
   fileName: string;
   imageUrl?: string;
-  productName: string;
-  productOwner: string;
   handleNext: (id: number) => void;
   handlePrev: (id: number) => void;
   fileId: number;
   metadata: { [k: string]: string };
-  // seconds?: number;
-  onStart?: () => void;
-  onPlay?: () => void;
-  onPause?: () => void;
 };
 
 const Player = ({
@@ -30,17 +24,8 @@ const Player = ({
   handlePrev,
   fileId,
   imageUrl,
-  productName,
-  productOwner,
   metadata,
-  onPlay,
-  onPause,
-  onStart,
 }: Props) => {
-  /**
-   * [] メタデータ(アーティスト情報・アルバム名・画像)を表示
-   * [] 名前をクリックすると再生
-   */
   const [position, setPosition] = useState(0);
   const [paused, setPaused] = useState(true);
   const [volume, setVolume] = useState<number>(30);
@@ -113,7 +98,7 @@ const Player = ({
               {metadata.artist}
             </p>
             <p className="whitespace-nowrap text-lg">
-              <b>{fileName?.split('.').slice(0, -1).join('.')}</b>
+              <b>{metadata.original?.split('.').slice(0, -1).join('.')}</b>
             </p>
             <p className="whitespace-nowrap tracking-tight text-slate-600">{metadata.album}</p>
           </div>

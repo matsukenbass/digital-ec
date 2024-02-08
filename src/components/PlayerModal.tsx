@@ -15,6 +15,7 @@ interface PlayerModalProps {
   productName: string;
   productOwner: string;
   metadata: { [k: string]: string }[];
+  originalFilenameList: string[];
 }
 
 const PlayerModal = ({
@@ -23,6 +24,7 @@ const PlayerModal = ({
   productName,
   productOwner,
   metadata,
+  originalFilenameList,
 }: PlayerModalProps) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(audioFilenameList[0]);
@@ -70,8 +72,6 @@ const PlayerModal = ({
                   handlePrev={handlePrev}
                   fileId={fileId}
                   imageUrl={validUrls[0]}
-                  productName={productName}
-                  productOwner={productOwner}
                   metadata={metadata[fileId]}
                 />
               </div>
@@ -79,11 +79,11 @@ const PlayerModal = ({
                 <ScrollArea className="h-48 rounded-md border">
                   <div className="p-4">
                     <h4 className="mb-4 text-sm font-medium leading-none">Music List</h4>
-                    {audioFilenameList.map((item, id) => (
+                    {originalFilenameList.map((item, id) => (
                       <div key={id}>
                         <div
                           className="text-sm"
-                          onClick={() => handleSelectSoundFile(item ?? '', id)}
+                          onClick={() => handleSelectSoundFile(audioFilenameList[id] ?? '', id)}
                         >
                           <span
                             className={cn('text-black', {
