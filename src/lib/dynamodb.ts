@@ -10,7 +10,7 @@ export async function getDataById(itemId: string) {
   });
 
   const params = {
-    TableName: process.env.METADATA_DB,
+    TableName: process.env.METADATA_DB ?? 'db_name',
     KeyConditionExpression: 'id = :id',
     ExpressionAttributeValues: {
       ':id': { S: itemId },
