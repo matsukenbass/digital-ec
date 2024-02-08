@@ -23,7 +23,7 @@ env:
   AUDIO_BUCKET: ${{vars.AUDIO_BUCKET}}
   MEDIA_BUCKET: ${{vars.MEDIA_BUCKET}}
   PRODUCT_FILES_BUCKET: ${{vars.PRODUCT_FILES_BUCKET}}
-  DYNAMODB_TABLE: ${{vars.DYNAMODB_TABLE}}
+  METADATA_DB: ${{vars.METADATA_DB}}
 
 jobs:
   test:
@@ -56,7 +56,7 @@ jobs:
           AUDIO_BUCKET: ${{env.AUDIO_BUCKET}}
           MEDIA_BUCKET: ${{env.MEDIA_BUCKET}}
           PRODUCT_FILES_BUCKET: ${{env.PRODUCT_FILES_BUCKET}}
-          DYNAMODB_TABLE: ${{env.DYNAMODB_TABLE}}
+          METADATA_DB: ${{env.METADATA_DB}}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -90,7 +90,7 @@ jobs:
             "AUDIO_BUCKET=${{env.AUDIO_BUCKET}}"
             "MEDIA_BUCKET=${{env.MEDIA_BUCKET}}"
             "PRODUCT_FILES_BUCKET=${{env.PRODUCT_FILES_BUCKET}}"
-            "DYNAMODB_TABLE=${{env.DYNAMODB_TABLE}}"
+            "METADATA_DB=${{env.METADATA_DB}}"
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:

@@ -10,7 +10,7 @@ export async function getDataById(itemId: string) {
   });
 
   const params = {
-    TableName: 'digital-ec-iac-MakemokeMusicMetadata-1P0XLV9UKEE4P',
+    TableName: process.env.METADATA_DB,
     KeyConditionExpression: 'id = :id',
     ExpressionAttributeValues: {
       ':id': { S: itemId },
