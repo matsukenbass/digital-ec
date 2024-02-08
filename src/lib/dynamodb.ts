@@ -10,7 +10,7 @@ export async function getDataById(itemId: string) {
   });
 
   const params = {
-    TableName: process.env.DYNAMODB_TABLE ?? '',
+    TableName: 'digital-ec-iac-MakemokeMusicMetadata-1P0XLV9UKEE4P',
     KeyConditionExpression: 'id = :id',
     ExpressionAttributeValues: {
       ':id': { S: itemId },
