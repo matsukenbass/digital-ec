@@ -1,18 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/drawer';
+import { Drawer, DrawerContent, DrawerFooter, DrawerTrigger } from '@/components/ui/drawer';
 import Player from './Player';
 import { _Object } from '@aws-sdk/client-s3';
-import { AudioLines, X } from 'lucide-react';
+import { AudioLines } from 'lucide-react';
 import { ScrollArea } from './ui/scroll-area';
 import { Separator } from './ui/separator';
 import { cn } from '@/lib/utils';
@@ -68,17 +60,6 @@ const PlayerModal = ({
       </DrawerTrigger>
       <DrawerContent className="flex">
         <div className="mx-auto w-full max-w-sm">
-          <DrawerHeader className="flex items-center">
-            <div>
-              <DrawerTitle>Playlist</DrawerTitle>
-              <DrawerDescription>聴きたいトラックをクリック</DrawerDescription>
-            </div>
-            {/* <div>
-              <DrawerClose>
-                <X onClick={closeModalHandler} />
-              </DrawerClose>
-            </div> */}
-          </DrawerHeader>
           {isMounted ? (
             <div>
               <div>

@@ -4,10 +4,7 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import ReactPlayer from 'react-player';
 
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import Slider from '@mui/material/Slider';
-import IconButton from '@mui/material/IconButton';
+import { Slider } from './ui/slider';
 import Image from 'next/image';
 import { FastForward, Pause, Play, Rewind, Volume1, Volume2 } from 'lucide-react';
 type Props = {
@@ -44,7 +41,6 @@ const Player = ({
    * [] メタデータ(アーティスト情報・アルバム名・画像)を表示
    * [] 名前をクリックすると再生
    */
-  const theme = useTheme();
   const [position, setPosition] = useState(0);
   const [paused, setPaused] = useState(true);
   const [volume, setVolume] = useState<number>(30);
@@ -88,7 +84,7 @@ const Player = ({
   }
 
   return (
-    <div className="w-full overflow-hidden">
+    <div className="mt-8 w-full overflow-hidden">
       <div className="hidden">
         <ReactPlayer
           url={url} //MEMO:GoogleDriveから取ってくるときは'https://drive.google.com/uc?id=1sDzBtne8T4HwGK2HCcelQQ4Zb3DnUfDV'みたいな感じ
@@ -113,51 +109,26 @@ const Player = ({
             </div>
           ) : null}
           <div className="ml-1.5 min-w-0">
-            <Typography variant="caption" color="text.secondary" fontWeight={500}>
+            <p className="text-ellipsis text-nowrap text-sm font-medium text-black">
               {metadata.artist}
-            </Typography>
-            <Typography noWrap>
+            </p>
+            <p className="whitespace-nowrap text-lg">
               <b>{fileName?.split('.').slice(0, -1).join('.')}</b>
-            </Typography>
-            <Typography noWrap letterSpacing={-0.25}>
-              {metadata.album}
-            </Typography>
+            </p>
+            <p className="whitespace-nowrap tracking-tight text-slate-600">{metadata.album}</p>
           </div>
         </div>
-        <Slider
-          // onChangeCommitted={playerRef?.current?.seekTo(position)}
-          aria-label="time-indicator"
-          size="small"
-          value={position}
-          min={0}
-          step={1}
-          max={duration}
-          onChange={(_, value) => handlePositionSlider(value as number)}
-          sx={{
-            color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
-            height: 4,
-            '& .MuiSlider-thumb': {
-              width: 8,
-              height: 8,
-              transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
-              '&:before': {
-                boxShadow: '0 2px 12px 0 rgba(0,0,0,0.4)',
-              },
-              '&:hover, &.Mui-focusVisible': {
-                boxShadow: `0px 0px 0px 8px ${
-                  theme.palette.mode === 'dark' ? 'rgb(255 255 255 / 16%)' : 'rgb(0 0 0 / 16%)'
-                }`,
-              },
-              '&.Mui-active': {
-                width: 20,
-                height: 20,
-              },
-            },
-            '& .MuiSlider-rail': {
-              opacity: 0.28,
-            },
-          }}
-        />
+        <div className="mb-4 mt-8">
+          <Slider
+            // onChangeCommitted={playerRef?.current?.seekTo(position)}
+            aria-label="time-indicator"
+            value={[position]}
+            min={0}
+            step={1}
+            max={duration}
+            onValueChange={(value: number[]) => handlePositionSlider(value[0])}
+          />
+        </div>
         <div className="mt-[-8px] flex items-center justify-between">
           <p className="text-xs font-medium tracking-tighter opacity-[38]">
             {formatDuration(position)}
@@ -167,40 +138,27 @@ const Player = ({
           </p>
         </div>
         <div className="mt-[-4px] flex items-center justify-center">
-          <IconButton aria-label="previous song" onClick={() => handlePrev(fileId)}>
-            <Rewind className="text-4xl" />
-          </IconButton>
-          <IconButton aria-label={paused ? 'play' : 'pause'} onClick={() => setPaused(!paused)}>
+          <div aria-label="previous song" onClick={() => handlePrev(fileId)} className="m-2">
+            <Rewind className="text-4xl" onClick={() => handlePrev(fileId)} />
+          </div>
+          <div
+            aria-label={paused ? 'play' : 'pause'}
+            onClick={() => setPaused(!paused)}
+            className="m-2"
+          >
             {paused ? <Play className="text-5xl" /> : <Pause className="text-5xl" />}
-          </IconButton>
-          <IconButton aria-label="next song" onClick={() => handleNext(fileId)}>
+          </div>
+          <div aria-label="next song" onClick={() => handleNext(fileId)} className="m-2">
             <FastForward className="text-4xl" />
-          </IconButton>
+          </div>
         </div>
-        <div className="mb-1 flex items-center justify-center space-x-2 px-1">
+        <div className="my-1 flex items-center justify-center space-x-2 px-1">
           <Volume1 />
           <Slider
             aria-label="Volume"
-            defaultValue={30}
-            value={volume}
-            onChange={(_, value) => setVolume(value as number)}
-            sx={{
-              color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
-              '& .MuiSlider-track': {
-                border: 'none',
-              },
-              '& .MuiSlider-thumb': {
-                width: 24,
-                height: 24,
-                backgroundColor: '#fff',
-                '&:before': {
-                  boxShadow: '0 4px 8px rgba(0,0,0,0.4)',
-                },
-                '&:hover, &.Mui-focusVisible, &.Mui-active': {
-                  boxShadow: 'none',
-                },
-              },
-            }}
+            defaultValue={[30]}
+            value={[volume]}
+            onValueChange={(value: number[]) => setVolume(value[0])}
           />
           <Volume2 />
         </div>
