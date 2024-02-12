@@ -32,7 +32,6 @@ export const Audio: CollectionConfig = {
         }
       },
     ],
-    afterChange: [({ req, doc }) => console.log('afterChange', doc)],
   },
   access: {
     read: async ({ req }) => {

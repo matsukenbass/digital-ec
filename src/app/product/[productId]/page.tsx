@@ -77,8 +77,6 @@ const Page = async ({ params }: PageProps) => {
     return { ...extracted, original: originalFilenameList[results.indexOf(item)] };
   });
 
-  console.log(metadata);
-
   return (
     <MaxWidthWrapper className="bg-white">
       <div className="bg-white">

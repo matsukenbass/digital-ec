@@ -1,6 +1,6 @@
 import { DynamoDBClient, QueryCommand } from '@aws-sdk/client-dynamodb';
 
-const table = 'digital-ec-iac-MakemokeMusicMetadata-1P0XLV9UKEE4P';
+const table = 'digital-ec-iac-MakemokeMusicMetadata-1FU3TKOEE7PG1';
 
 export async function getDataById(itemId: string) {
   const client = new DynamoDBClient({
