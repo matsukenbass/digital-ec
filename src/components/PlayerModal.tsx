@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { Drawer, DrawerContent, DrawerFooter, DrawerTrigger } from '@/components/ui/drawer';
 import Player from './Player';
-import { _Object } from '@aws-sdk/client-s3';
 import { AudioLines } from 'lucide-react';
 import { ScrollArea } from './ui/scroll-area';
 import { Separator } from './ui/separator';
