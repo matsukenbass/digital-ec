@@ -20,16 +20,19 @@ export const Audio: CollectionConfig = {
   slug: 'audio',
   hooks: {
     beforeChange: [
-      ({ req, data }) => {
-        // addUser and original filename
-        return {
-          ...data,
-          filename: cuid(), //S3に格納する時のID（CMSではfilename扱い）
-          user: req.user?.id,
-          originalFilename: req.files?.file.name,
-        };
+      ({ req, data, operation }) => {
+        if (operation === 'create') {
+          // addUser and original filename
+          return {
+            ...data,
+            filename: cuid(), //S3に格納する時のID（CMSではfilename扱い）
+            user: req.user?.id,
+            originalFilename: req.files?.file.name,
+          };
+        }
       },
     ],
+    afterChange: [({ req, doc }) => console.log('afterChange', doc)],
   },
   access: {
     read: async ({ req }) => {

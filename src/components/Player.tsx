@@ -29,7 +29,7 @@ const Player = ({
   const [position, setPosition] = useState(0);
   const [paused, setPaused] = useState(true);
   const [volume, setVolume] = useState<number>(30);
-  const [duration, setDuration] = useState(0); // FIXME:ファイルの再生時間を取得して格納する
+  const [duration, setDuration] = useState(0);
   const [url, setUrl] = useState(`${process.env.NEXT_PUBLIC_SERVER_URL}/audio/${fileName}`);
 
   const handleFileChange = useCallback(() => {
@@ -98,7 +98,7 @@ const Player = ({
               {metadata.artist}
             </p>
             <p className="whitespace-nowrap text-lg">
-              <b>{metadata.original?.split('.').slice(0, -1).join('.')}</b>
+              <b>{metadata.title}</b>
             </p>
             <p className="whitespace-nowrap tracking-tight text-slate-600">{metadata.album}</p>
           </div>

@@ -4,19 +4,19 @@ export const PRODUCT_CATEGORIES = [
     value: 'music' as const,
     featured: [
       {
-        name: 'Editor picks',
+        name: 'Picks',
         href: `/products?category=music`,
-        imageSrc: '/nav/ui-kits/mixed.jpg',
+        imageSrc: '/nav/music/mixed.jpg',
       },
       {
         name: 'New Arrivals',
         href: '/products?category=music&sort=desc',
-        imageSrc: '/nav/ui-kits/blue.jpg',
+        imageSrc: '/nav/music/blue.jpg',
       },
       {
         name: 'Bestsellers',
         href: '/products?category=music',
-        imageSrc: '/nav/ui-kits/purple.jpg',
+        imageSrc: '/nav/music/purple.jpg',
       },
     ],
   },
@@ -27,17 +27,17 @@ export const PRODUCT_CATEGORIES = [
       {
         name: 'Favorite Book Picks',
         href: `/products?category=books`,
-        imageSrc: '/nav/icons/picks.jpg',
+        imageSrc: '/nav/books/picks.jpg',
       },
       {
         name: 'New Arrivals',
         href: '/products?category=books&sort=desc',
-        imageSrc: '/nav/icons/new.jpg',
+        imageSrc: '/nav/books/new.jpg',
       },
       {
         name: 'Bestselling Books',
         href: '/products?category=books',
-        imageSrc: '/nav/icons/bestsellers.jpg',
+        imageSrc: '/nav/books/bestsellers.jpg',
       },
     ],
   },

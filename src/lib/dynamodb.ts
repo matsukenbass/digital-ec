@@ -1,5 +1,7 @@
 import { DynamoDBClient, QueryCommand } from '@aws-sdk/client-dynamodb';
 
+const table = process.env.METADATA_DB;
+
 export async function getDataById(itemId: string) {
   const client = new DynamoDBClient({
     region: process.env.AWS_REGION,
@@ -10,7 +12,7 @@ export async function getDataById(itemId: string) {
   });
 
   const params = {
-    TableName: 'digital-ec-iac-MakemokeMusicMetadata-1P0XLV9UKEE4P',
+    TableName: table,
     KeyConditionExpression: 'id = :id',
     ExpressionAttributeValues: {
       ':id': { S: itemId },

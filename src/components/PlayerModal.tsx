@@ -21,14 +21,17 @@ interface PlayerModalProps {
 const PlayerModal = ({
   validUrls,
   audioFilenameList,
-  productName,
-  productOwner,
   metadata,
   originalFilenameList,
 }: PlayerModalProps) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(audioFilenameList[0]);
   const [fileId, setFileId] = useState(0);
+
+  const musicList = metadata.map((item, index) =>
+    item.title ? item.title : originalFilenameList[index]
+  );
+
   const handleSelectSoundFile = (fileName: string, id: number) => {
     setSelectedFileName(fileName);
     setFileId(id);
@@ -42,10 +45,6 @@ const PlayerModal = ({
     if (audioFilenameList && id !== audioFilenameList?.length - 1) {
       handleSelectSoundFile(audioFilenameList[id + 1] ?? '', id + 1);
     }
-  };
-
-  const closeModalHandler = () => {
-    setSelectedFileName(null);
   };
 
   useEffect(() => {
@@ -79,7 +78,7 @@ const PlayerModal = ({
                 <ScrollArea className="h-48 rounded-md border">
                   <div className="p-4">
                     <h4 className="mb-4 text-sm font-medium leading-none">Music List</h4>
-                    {originalFilenameList.map((item, id) => (
+                    {musicList.map((item, id) => (
                       <div key={id}>
                         <div
                           className="text-sm"
