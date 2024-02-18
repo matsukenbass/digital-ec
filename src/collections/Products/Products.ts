@@ -139,9 +139,9 @@ export const Products: CollectionConfig = {
     },
     {
       name: 'price',
-      label: 'Price in USD',
+      label: 'Price in JPY',
       min: 0,
-      max: 1000,
+      max: 100000,
       type: 'number',
       required: true,
     },
