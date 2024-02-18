@@ -64,8 +64,6 @@ const Page = async ({ params }: PageProps) => {
     results.push(result[0]);
   }
 
-  console.log(results);
-
   // TypeScriptのオブジェクトからSに対するvalueのみ取り出す関数
   const extractSValues = (obj: Record<string, { S: string }>): { [k: string]: string } => {
     const keys = Object.keys(obj);
