@@ -108,7 +108,7 @@ jobs:
           api_token: '${{ secrets.KOYEB_TOKEN }}'
           github_token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Deploy to Koyeb
-        run: koyeb service redeploy digital-ec/digital-ec
+        run: koyeb service redeploy makemoke-dev/makemoke-dev
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
