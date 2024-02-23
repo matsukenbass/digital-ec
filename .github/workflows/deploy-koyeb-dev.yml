@@ -78,7 +78,7 @@ jobs:
           build-args: |
             "PAYLOAD_SECRET=${{env.PAYLOAD_SECRET}}"
             "MONGODB_URL=${{env.MONGODB_URL}}"
-            "NEXT_PUBLIC_SERVER_URL=${{vars.NEXT_PUBLIC_SERVER_URL}}"
+            "NEXT_PUBLIC_SERVER_URL=${{secrets.NEXT_PUBLIC_DEV_SERVER_URL}}"
             "RESEND_API_KEY=${{env.RESEND_API_KEY}}"
             "STRIPE_SECRET_KEY=${{env.STRIPE_SECRET_KEY}}"
             "STRIPE_WEBHOOK_SECRET=${{env.STRIPE_WEBHOOK_SECRET}}"
