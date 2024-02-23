@@ -102,6 +102,13 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results.sarif'
+      - name: Install and configure the Koyeb CLI
+        uses: koyeb-community/install-koyeb-cli@v2
+        with:
+          api_token: '${{ secrets.KOYEB_TOKEN }}'
+          github_token: '${{ secrets.GITHUB_TOKEN }}'
+      - name: Deploy to Koyeb
+        run: koyeb service redeploy digital-ec/digital-ec
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
