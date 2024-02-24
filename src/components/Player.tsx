@@ -3,7 +3,6 @@
 import { useRef, useState, useCallback, useMemo } from 'react';
 import ReactPlayer from 'react-player';
 
-import * as React from 'react';
 import { Slider } from './ui/slider';
 import Image from 'next/image';
 import { FastForward, Pause, Play, Rewind, Volume1, Volume2 } from 'lucide-react';

@@ -59,22 +59,22 @@ const Cart = () => {
               <Separator />
               <div className="space-y-1.5 text-sm">
                 <div className="flex">
-                  <span className="flex-1">Shipping</span>
-                  <span>Free</span>
+                  <span className="flex-1">配送料</span>
+                  <span>{formatPrice(0)}</span>
                 </div>
                 <div className="flex">
-                  <span className="flex-1">Transaction Fee</span>
+                  <span className="flex-1">手数料</span>
                   <span>{formatPrice(fee)}</span>
                 </div>
                 <div className="flex">
-                  <span className="flex-1">Total</span>
+                  <span className="flex-1">合計</span>
                   <span>{formatPrice(cartTotal + fee)}</span>
                 </div>
               </div>
               <SheetFooter>
                 <SheetTrigger asChild>
                   <Link href="/cart" className={buttonVariants({ className: 'w-full' })}>
-                    Continue to Checkout
+                    確認画面に進む
                   </Link>
                 </SheetTrigger>
               </SheetFooter>
