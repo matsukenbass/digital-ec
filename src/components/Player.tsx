@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useCallback, useMemo } from 'react';
 import ReactPlayer from 'react-player';
 
 import * as React from 'react';
@@ -40,16 +40,16 @@ const Player = ({
     }
   }, [fileName, url]);
 
-  useEffect(() => {
+  useMemo(() => {
     if (position === duration && position !== 0) {
       setPosition(0);
       handleNext(fileId);
     }
   }, [duration, fileId, position, handleNext]);
 
-  useEffect(() => {
+  useMemo(() => {
     handleFileChange();
-  }, [bucket, fileName, handleFileChange]);
+  }, [handleFileChange]);
 
   const playerRef = useRef<ReactPlayer>(null);
 
