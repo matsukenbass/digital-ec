@@ -11,6 +11,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'digital-ec-matsukenbass.koyeb.app',
       },
+      {
+        protocol: 'https',
+        hostname: 'makemoke-dev-matsukenbass.koyeb.app',
+      },
     ],
   },
 };
