@@ -9,25 +9,11 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-  PAYLOAD_SECRET: ${{secrets.PAYLOAD_SECRET}}
-  MONGODB_URL: ${{vars.MONGODB_URL}}
-  RESEND_API_KEY: ${{vars.RESEND_API_KEY}}
-  STRIPE_SECRET_KEY: ${{secrets.STRIPE_SECRET_KEY}}
-  STRIPE_WEBHOOK_SECRET: ${{secrets.STRIPE_WEBHOOK_SECRET}}
-  AWS_REGION: ${{vars.AWS_REGION}}
-  S3_ACCESS_KEY_ID: ${{vars.S3_ACCESS_KEY_ID}}
-  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-  NEXT_PUBLIC_AWS_ACCESS_KEY: ${{vars.NEXT_PUBLIC_AWS_ACCESS_KEY}}
-  NEXT_PUBLIC_AWS_SECRET: ${{secrets.NEXT_PUBLIC_AWS_SECRET}}
-  AUDIO_BUCKET: ${{vars.AUDIO_BUCKET}}
-  MEDIA_BUCKET: ${{vars.MEDIA_BUCKET}}
-  PRODUCT_FILES_BUCKET: ${{vars.PRODUCT_FILES_BUCKET}}
-  METADATA_DB: ${{vars.METADATA_DB}}
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: prod
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -42,21 +28,19 @@ jobs:
         run: yarn test:e2e
         env:
           CI: ${{vars.CI}}
-          PAYLOAD_SECRET: ${{env.PAYLOAD_SECRET}}
-          MONGODB_URL: ${{env.MONGODB_URL}}
+          PAYLOAD_SECRET: ${{secrets.PAYLOAD_SECRET}}
+          MONGODB_URL: ${{secrets.MONGODB_URL}}
           NEXT_PUBLIC_SERVER_URL: http://localhost:3000
-          RESEND_API_KEY: ${{env.RESEND_API_KEY}}
-          STRIPE_SECRET_KEY: ${{env.STRIPE_SECRET_KEY}}
-          STRIPE_WEBHOOK_SECRET: ${{env.STRIPE_WEBHOOK_SECRET}}
-          AWS_REGION: ${{env.AWS_REGION}}
-          S3_ACCESS_KEY_ID: ${{env.S3_ACCESS_KEY_ID}}
-          S3_SECRET_ACCESS_KEY: ${{env.S3_SECRET_ACCESS_KEY}}
-          NEXT_PUBLIC_AWS_ACCESS_KEY: ${{env.NEXT_PUBLIC_AWS_ACCESS_KEY}}
-          NEXT_PUBLIC_AWS_SECRET: ${{env.NEXT_PUBLIC_AWS_SECRET}}
-          AUDIO_BUCKET: ${{env.AUDIO_BUCKET}}
-          MEDIA_BUCKET: ${{env.MEDIA_BUCKET}}
-          PRODUCT_FILES_BUCKET: ${{env.PRODUCT_FILES_BUCKET}}
-          METADATA_DB: ${{env.METADATA_DB}}
+          RESEND_API_KEY: ${{vars.RESEND_API_KEY}}
+          STRIPE_SECRET_KEY: ${{secrets.STRIPE_SECRET_KEY}}
+          STRIPE_WEBHOOK_SECRET: ${{secrets.STRIPE_WEBHOOK_SECRET}}
+          AWS_REGION: ${{vars.AWS_REGION}}
+          S3_ACCESS_KEY_ID: ${{vars.S3_ACCESS_KEY_ID}}
+          S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+          AUDIO_BUCKET: ${{vars.AUDIO_BUCKET}}
+          MEDIA_BUCKET: ${{vars.MEDIA_BUCKET}}
+          PRODUCT_FILES_BUCKET: ${{vars.PRODUCT_FILES_BUCKET}}
+          METADATA_DB: ${{vars.METADATA_DB}}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -66,6 +50,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    environment: prod
     steps:
       - name: Docker login
         run: echo ${{ secrets.GHCR_TOKEN }} | docker login ${{env.REGISTRY}} -u ${{ github.actor }} --password-stdin
@@ -76,21 +61,19 @@ jobs:
           tags: ${{env.REGISTRY}}/${{ github.actor }}/${{vars.REGISTRY_NAME}}:latest
           file: ./Dockerfile
           build-args: |
-            "PAYLOAD_SECRET=${{env.PAYLOAD_SECRET}}"
-            "MONGODB_URL=${{env.MONGODB_URL}}"
+            "PAYLOAD_SECRET=${{secrets.PAYLOAD_SECRET}}"
+            "MONGODB_URL=${{secrets.MONGODB_URL}}"
             "NEXT_PUBLIC_SERVER_URL=${{vars.NEXT_PUBLIC_SERVER_URL}}"
-            "RESEND_API_KEY=${{env.RESEND_API_KEY}}"
-            "STRIPE_SECRET_KEY=${{env.STRIPE_SECRET_KEY}}"
-            "STRIPE_WEBHOOK_SECRET=${{env.STRIPE_WEBHOOK_SECRET}}"
-            "AWS_REGION=${{env.AWS_REGION}}"
-            "S3_ACCESS_KEY_ID=${{env.S3_ACCESS_KEY_ID}}"
-            "S3_SECRET_ACCESS_KEY=${{env.S3_SECRET_ACCESS_KEY}}"
-            "NEXT_PUBLIC_AWS_ACCESS_KEY=${{env.NEXT_PUBLIC_AWS_ACCESS_KEY}}"
-            "NEXT_PUBLIC_AWS_SECRET=${{env.NEXT_PUBLIC_AWS_SECRET}}"
-            "AUDIO_BUCKET=${{env.AUDIO_BUCKET}}"
-            "MEDIA_BUCKET=${{env.MEDIA_BUCKET}}"
-            "PRODUCT_FILES_BUCKET=${{env.PRODUCT_FILES_BUCKET}}"
-            "METADATA_DB=${{env.METADATA_DB}}"
+            "RESEND_API_KEY=${{vars.RESEND_API_KEY}}"
+            "STRIPE_SECRET_KEY=${{secrets.STRIPE_SECRET_KEY}}"
+            "STRIPE_WEBHOOK_SECRET=${{secrets.STRIPE_WEBHOOK_SECRET}}"
+            "AWS_REGION=${{vars.AWS_REGION}}"
+            "S3_ACCESS_KEY_ID=${{vars.S3_ACCESS_KEY_ID}}"
+            "S3_SECRET_ACCESS_KEY=${{secrets.S3_SECRET_ACCESS_KEY}}"
+            "AUDIO_BUCKET=${{vars.AUDIO_BUCKET}}"
+            "MEDIA_BUCKET=${{vars.MEDIA_BUCKET}}"
+            "PRODUCT_FILES_BUCKET=${{vars.PRODUCT_FILES_BUCKET}}"
+            "METADATA_DB=${{vars.METADATA_DB}}"
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
