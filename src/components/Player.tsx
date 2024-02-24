@@ -3,7 +3,6 @@
 import { useRef, useState, useCallback, useMemo } from 'react';
 import ReactPlayer from 'react-player';
 
-import * as React from 'react';
 import { Slider } from './ui/slider';
 import Image from 'next/image';
 import { FastForward, Pause, Play, Rewind, Volume1, Volume2 } from 'lucide-react';
@@ -72,14 +71,13 @@ const Player = ({
     <div className="mt-8 w-full overflow-hidden">
       <div className="hidden">
         <ReactPlayer
-          url={url} //MEMO:GoogleDriveから取ってくるときは'https://drive.google.com/uc?id=1sDzBtne8T4HwGK2HCcelQQ4Zb3DnUfDV'みたいな感じ
+          url={url}
           playing={!paused}
           volume={volume / 100}
           controls
           width="100%"
           height="100%"
           ref={playerRef}
-          // onSeek={(state) => setPosition(state)}
           onProgress={(state) => setPosition(state.playedSeconds)}
           onDuration={(d) => handleDuration(d)}
           lazy
@@ -89,8 +87,15 @@ const Player = ({
       <div className="relative z-[1] m-auto w-[343px] max-w-full rounded-2xl bg-white/40 p-4 backdrop-blur-[40]">
         <div className="flex items-center">
           {imageUrl ? (
-            <div className="h-[100px] w-[100px] shrink-0 overflow-hidden rounded-lg bg-black/[0.08] object-cover '& > img': {@apply w-full}">
-              <Image width={100} height={100} alt={fileName} src={imageUrl} priority={true} />
+            <div className="h-[100px] w-[100px] shrink-0 overflow-hidden rounded-lg bg-black/[0.08] object-cover">
+              <Image
+                width={100}
+                height={100}
+                alt={fileName}
+                src={imageUrl}
+                priority={true}
+                loading="eager"
+              />
             </div>
           ) : null}
           <div className="ml-1.5 min-w-0">
@@ -105,7 +110,6 @@ const Player = ({
         </div>
         <div className="mb-4 mt-8">
           <Slider
-            // onChangeCommitted={playerRef?.current?.seekTo(position)}
             aria-label="time-indicator"
             value={[position]}
             min={0}

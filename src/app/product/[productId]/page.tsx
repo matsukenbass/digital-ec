@@ -1,5 +1,4 @@
 import AddToCartButton from '@/components/AddToCartButton';
-import ImageSlider from '@/components/ImageSlider';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import ProductReel from '@/components/ProductReel';
 import PlayerModal from '@/components/PlayerModal';
@@ -11,6 +10,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Audio } from '../../../payload-types';
 import { getDataById } from '@/lib/dynamodb';
+import { lazy, Suspense } from 'react';
+
+const LazyImageSlider = lazy(() => import('@/components/ImageSlider'));
 
 interface PageProps {
   params: {
@@ -64,7 +66,6 @@ const Page = async ({ params }: PageProps) => {
     results.push(result[0]);
   }
 
-  // TypeScriptのオブジェクトからSに対するvalueのみ取り出す関数
   const extractSValues = (obj: Record<string, { S: string }>): { [k: string]: string } => {
     const keys = Object.keys(obj);
     const vals = Object.values(obj).map((value) => value.S);
@@ -81,7 +82,6 @@ const Page = async ({ params }: PageProps) => {
     <MaxWidthWrapper className="bg-white">
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
-          {/* Product Details */}
           <div className="lg:max-w-lg lg:self-end">
             <ol className="flex items-center space-x-2">
               {BREADCRUMBS.map((breadcrumb, i) => (
@@ -144,13 +144,13 @@ const Page = async ({ params }: PageProps) => {
               </div>
             </section>
           </div>
-          {/* Product images */}
           <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
             <div className="aspect-square rounded-lg">
-              <ImageSlider urls={validUrls}></ImageSlider>
+              <Suspense fallback={<div>Loading...</div>}>
+                <LazyImageSlider urls={validUrls}></LazyImageSlider>
+              </Suspense>
             </div>
           </div>
-          {/* add to cart part */}
           <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
             <div className="mt-10">
               <AddToCartButton product={product}></AddToCartButton>

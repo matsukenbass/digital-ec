@@ -95,7 +95,7 @@ const Page = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="grid gap-2">
                 <div className="grid gap-1 py-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">メールアドレス</Label>
                   <Input
                     {...register('email')}
                     className={cn({
@@ -107,7 +107,7 @@ const Page = () => {
                 </div>
 
                 <div className="grid gap-1 py-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">パスワード</Label>
                   <Input
                     {...register('password')}
                     type="password"

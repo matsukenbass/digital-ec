@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import UserAccountNav from './UserAccountNav';
+import Cart from './Cart';
 
 type MobileNavProps = {
   user: User | null;
@@ -104,7 +105,10 @@ const MobileNav = ({ user }: MobileNavProps) => {
             </div>
 
             {user ? (
-              <UserAccountNav user={user} />
+              <div className="space-y-6 border-t border-gray-200 px-4 py-6">
+                <UserAccountNav user={user} />
+                <Cart />
+              </div>
             ) : (
               <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                 <div className="flow-root">
