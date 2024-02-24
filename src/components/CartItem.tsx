@@ -20,6 +20,7 @@ const CartItem = ({ product }: { product: Product }) => {
                 alt={product.name}
                 fill
                 sizes="100vw"
+                priority
                 className="absolute object-cover"
               />
             ) : (

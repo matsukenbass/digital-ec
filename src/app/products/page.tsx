@@ -1,6 +1,8 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-import ProductReel from '@/components/ProductReel';
 import { PRODUCT_CATEGORIES } from '@/config';
+import { Suspense, lazy } from 'react';
+
+const LazyProductReel = lazy(() => import('@/components/ProductReel'));
 
 type Param = string | string[] | undefined;
 
@@ -20,14 +22,16 @@ const ProductsPage = ({ searchParams }: ProductsPageProps) => {
 
   return (
     <MaxWidthWrapper>
-      <ProductReel
-        title={label ?? 'Browse high-quality assets'}
-        query={{
-          category,
-          limit: 40,
-          sort: sort === 'desc' || sort === 'asc' ? sort : undefined,
-        }}
-      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyProductReel
+          title={label ?? 'Browse high-quality assets'}
+          query={{
+            category,
+            limit: 40,
+            sort: sort === 'desc' || sort === 'asc' ? sort : undefined,
+          }}
+        />
+      </Suspense>
     </MaxWidthWrapper>
   );
 };

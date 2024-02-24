@@ -88,6 +88,7 @@ const Cart = () => {
                 fill
                 sizes="100vw"
                 alt="empty shopping cart hippo"
+                priority
               />
             </div>
             <div className="text-xl font-semibold">Your cart is empty!</div>

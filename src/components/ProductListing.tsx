@@ -1,7 +1,7 @@
 'use client';
 
 import { Product } from '@/payload-types';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { Skeleton } from './ui/skeleton';
 import Link from 'next/link';
 import { cn, formatPrice } from '@/lib/utils';
@@ -13,7 +13,7 @@ interface ProductListingProps {
   index: number;
 }
 
-const ProductListing = ({ product, index }: ProductListingProps) => {
+const ProductListing = memo(({ product, index }: ProductListingProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
@@ -50,9 +50,9 @@ const ProductListing = ({ product, index }: ProductListingProps) => {
       </Link>
     );
   }
-};
+});
 
-const ProductPlaceholder = () => {
+const ProductPlaceholder = memo(() => {
   return (
     <div className="flex w-full flex-col">
       <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-zinc-100">
@@ -63,6 +63,9 @@ const ProductPlaceholder = () => {
       <Skeleton className="mt-2 h-4 w-12 rounded-lg" />
     </div>
   );
-};
+});
+
+ProductListing.displayName = 'ProductListing';
+ProductPlaceholder.displayName = 'ProductPlaceholder';
 
 export default ProductListing;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Drawer, DrawerContent, DrawerFooter, DrawerTrigger } from '@/components/ui/drawer';
 import Player from './Player';
 import { AudioLines } from 'lucide-react';
@@ -50,6 +50,8 @@ const PlayerModal = ({
     setIsMounted(true);
   }, []);
 
+  const imageUrl = useMemo(() => validUrls[0], [validUrls]);
+
   return (
     <Drawer>
       <DrawerTrigger>
@@ -69,7 +71,7 @@ const PlayerModal = ({
                   handleNext={handleNext}
                   handlePrev={handlePrev}
                   fileId={fileId}
-                  imageUrl={validUrls[0]}
+                  imageUrl={imageUrl}
                   metadata={metadata[fileId]}
                 />
               </div>
