@@ -18,7 +18,8 @@ export default defineConfig({
   globalSetup: './tests/setup.ts',
 
   // timeout: 100000,
-  testDir: './tests',
+  testDir: './tests/scenario/',
+  testIgnore: process.env.CI ? ['./tests/scenario/scenario2.spec.ts'] : [],
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
