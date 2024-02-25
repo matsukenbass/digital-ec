@@ -1,13 +1,10 @@
-import { mockProductRes } from '../__mocks__/mockData';
-import { test, expect } from '../__mocks__/testUtils';
+import { mockProductRes } from '../../__mocks__/mockData';
+import { test, expect } from '../../__mocks__/testUtils';
 
 test('商品表示テスト', async ({ page }) => {
   await page.goto('/', { waitUntil: 'networkidle' });
-
   expect(await page.getByRole('link', { name: 'Browse Trending' })).toBeVisible();
-
   await page.getByRole('link', { name: 'Browse Trending' }).click();
-
   await page.waitForLoadState();
 
   for (const item of mockProductRes.items) {
