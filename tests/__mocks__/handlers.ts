@@ -8,6 +8,11 @@ const handlers = [
     type: 'query',
     response: mockProductRes,
   }),
+  trpcMswHandlerFactory({
+    path: ['auth', 'signIn'],
+    type: 'query',
+    response: { success: true },
+  }),
 ];
 
 export default handlers;

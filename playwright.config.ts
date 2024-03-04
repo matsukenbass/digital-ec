@@ -18,15 +18,15 @@ export default defineConfig({
   globalSetup: './tests/setup.ts',
 
   // timeout: 100000,
-  testDir: './tests',
+  testDir: './tests/scenario/',
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: !!process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: 2,
+  workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['html', { open: 'never' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -35,7 +35,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     // headless: false,
     baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
-    video: process.env.CI ? 'off' : 'on',
+    video: !!process.env.CI ? 'off' : 'on',
   },
 
   /* Configure projects for major browsers */

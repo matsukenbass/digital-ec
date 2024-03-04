@@ -16,7 +16,8 @@
     "lint:fix": "next lint --fix",
     "type": "npx tsc -p . --noEmit",
     "test:e2e": "playwright test",
-    "test:codegen": "npx playwright codegen"
+    "test:codegen": "npx playwright codegen",
+    "test:codegen:mobile": "npx playwright codegen --device='iPhone SE'"
   },
   "resolutions": {
     "cliui": "7.0.2"
