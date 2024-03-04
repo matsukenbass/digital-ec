@@ -15,10 +15,10 @@ test('ログインテスト', async ({ page }) => {
     await page.waitForSelector('role=link[name="Sign in"]', { state: 'visible' });
   }
 
-  console.log(testMailAddress);
-
   await page.getByRole('link', { name: 'Sign in' }).click();
+  await page.getByPlaceholder('you@example.com').click();
   await page.getByPlaceholder('you@example.com').fill(testMailAddress);
+  await page.getByPlaceholder('Password').click();
   await page.getByPlaceholder('Password').fill(testPassword);
   await page.getByRole('button', { name: 'Sign in' }).click();
 

@@ -37,6 +37,7 @@ const Cart = () => {
         <ShoppingCart
           aria-hidden="true"
           className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-gray-500"
+          data-testid="cart-icon"
         />
         <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
           {isMounted ? itemCount : 0}
