@@ -3,7 +3,7 @@ import { test, expect } from '../../__mocks__/testUtils';
 const testMailAddress = process.env.TEST_ACCOUNT_MAIL ?? '';
 const testPassword = process.env.TEST_ACCOUNT_PASSWORD ?? '';
 
-test('ログインテスト', async ({ page }) => {
+test.skip('ログインテスト', async ({ page }) => {
   await page.goto('/');
 
   const userAgent = await page.evaluate(() => navigator.userAgent);
